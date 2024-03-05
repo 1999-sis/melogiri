@@ -48,24 +48,8 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(com.example.melogiri.view.LoginActivity.this, editTextEmail.getText().toString(), Toast.LENGTH_SHORT).show();
                 // Call the login task from the controller
                 appController.loginTask(LoginActivity.this, email, password);
-
             }
         });
-    }
-
-    // This method will be called by the controller after the login task is completed
-    //Spostare nel controller
-    public void onLoginResult(Utente utente, boolean success)
-    {
-        if (success) {
-            // Login successful, navigate to home page
-            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
-            startActivity(intent);
-            finish(); // Finish the LoginActivity to prevent going back to it using the back button
-        } else {
-            // Login failed, show a toast message
-            Toast.makeText(LoginActivity.this, "Login failed. Please check your credentials.", Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
