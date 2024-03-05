@@ -1,0 +1,47 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.melogiri">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MeloGiri" >
+
+        <!-- Activities -->
+
+        <!-- View Activities -->
+        <activity android:name=".view.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.RegisterActivity" />
+        <activity android:name=".view.HomePageActivity" />
+        <activity android:name=".view.CarrelloActivity" />
+        <activity android:name=".view.UtenteActivity" />
+        <activity android:name=".view.BevandaDescriptionActivity" />
+
+        <!-- Controller Activities (if any) -->
+        <!-- No specific declaration needed for controller activities -->
+
+        <!-- Model Components -->
+        <!-- Declare model components as services if they run independently -->
+        <!-- For SocketAPI, if it runs independently, declare it as a service -->
+        <!-- For Utente, it's a model class and doesn't require declaration -->
+
+        <!-- Services -->
+        <service android:name=".model.SocketAPI"
+            tools:ignore="Instantiatable" />
+        <!-- Example: -->
+        <!-- <service android:name=".model.SocketService" /> -->
+
+        <!-- Additional Declarations (if any) -->
+
+    </application>
+
+</manifest>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="414dp"
+        android:layout_height="87dp"
+        android:background="@color/material_dynamic_primary90"
+        android:elevation="50dp"
+        android:scrollbars="none"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_softdrink"
+                android:layout_width="200dp"
+                android:layout_height="87dp"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="@color/buttonBackground"
+                android:drawableLeft="@drawable/coffee_cup"
+                android:text="Soft Drink"
+                android:textColor="@android:color/black"
+                app:cornerRadius="15dp"
+                app:elevation="10dp" />
+
+            <Button
+                android:id="@+id/btn_alcolici"
+                android:layout_width="200dp"
+                android:layout_height="87dp"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="@color/buttonBackground"
+                android:drawableLeft="@drawable/drink__1_"
+                android:text="Alcolici"
+                android:textColor="@android:color/black"
+                app:cornerRadius="15dp"
+                app:elevation="10dp" />
+
+            <Button
+                android:id="@+id/btn_analcolici"
+                android:layout_width="200dp"
+                android:layout_height="87dp"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="@color/buttonBackground"
+                android:drawableLeft="@drawable/cocktail__1_"
+                android:text="Analcolici"
+                android:textColor="@android:color/black"
+                app:cornerRadius="15dp"
+                app:elevation="10dp" />
+
+            <Button
+                android:id="@+id/btn_vini"
+                android:layout_width="200dp"
+                android:layout_height="87dp"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="@color/buttonBackground"
+                android:drawableLeft="@drawable/glass_with_wine__1_"
+                android:text="Vini"
+                android:textColor="@android:color/black"
+                app:cornerRadius="15dp"
+                app:elevation="10dp" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/btnShowCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="616dp"
+        android:onClick="showCart"
+        android:text="Mostra Carrello"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cornerRadius="15dp"
+        app:elevation="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec_viewCard"
+        android:layout_width="413dp"
+        android:layout_height="521dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="130dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnShowCart"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView"
+        app:layout_constraintVertical_bias="0.23" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

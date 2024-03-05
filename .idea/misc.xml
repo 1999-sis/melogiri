@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Carmi/AndroidStudioProjects/MeloGiri/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2415" />
+        <entry key="..\:/Users/Carmi/AndroidStudioProjects/MeloGiri/app/src/main/res/drawable/faccia.xml" value="0.2415" />
+        <entry key="..\:/Users/Carmi/AndroidStudioProjects/MeloGiri/app/src/main/res/drawable/faccia_background.xml" value="0.2415" />
+        <entry key="..\:/Users/Carmi/AndroidStudioProjects/MeloGiri/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2415" />
+        <entry key="..\:/Users/Carmi/AndroidStudioProjects/MeloGiri/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/Carmi/AndroidStudioProjects/MeloGiri/app/src/main/res/layout/activity_register.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Carmi/AndroidStudioProjects/MeloGiri/app/src/main/res/layout/card_bevanda.xml" value="0.33" />
+        <entry key="..\:/Users/Carmi/AndroidStudioProjects/MeloGiri/app/src/main/res/layout/homepage.xml" value="0.1503623188405797" />
+        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/drawable/button_border.xml" value="0.1" />
+        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/activity_bevanda_description.xml" value="0.22" />
+        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/activity_login.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/activity_utente.xml" value="0.23867753623188406" />
+        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/card_bevanda.xml" value="0.22" />
+        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/carrello_activity.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/copy.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/homepage.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/top_menu.xml" value="0.264" />
+        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/menu/menuhompage.xml" value="0.264" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
