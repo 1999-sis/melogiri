@@ -31,6 +31,7 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
     private BevandaAdapter adapter;
     private AppController appController;
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menuhompage, menu);
@@ -60,7 +61,13 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);
 
+        Utente utente = new Utente();
+        Intent intent = getIntent();
+
         appController = new AppController(); // Instantiate the AppController
+        utente.setNome(intent.getStringExtra("nome"));
+        utente.setCognome(intent.getStringExtra("cognome"));
+        utente.setEmail(intent.getStringExtra("email"));
 
         recyclerView = findViewById(R.id.rec_viewCard);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -72,7 +79,7 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
         productList.add(new Bevanda("Prodotto 4", "Descrizione prodotto 4", "Da inserire URL", new Categoria("Soft Drink")));
         productList.add(new Bevanda("Prodotto 5", "Descrizione prodotto 5", "Da inserire URL", new Categoria("Alcolici")));
 
-        adapter = new BevandaAdapter(productList, this);
+        adapter = new BevandaAdapter(productList);
         recyclerView.setAdapter(adapter);
 
         Button showCartBtn = findViewById(R.id.btnShowCart);
@@ -88,14 +95,76 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
         softDrink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Handle soft drink button click
-                // You can call methods from the controller to handle business logic
+                ArrayList<Bevanda> softDrinks = new ArrayList<>();
+
+                for(Bevanda bevanda : productList){
+                    String categoria = bevanda.getCategoria().toString();
+                    Log.d("Categoria: ",categoria);
+                    if(categoria.equalsIgnoreCase(new Categoria("Soft Drink").toString())) {
+                        softDrinks.add(bevanda);
+                    }
+                }
+                BevandaAdapter adapterSoft = new BevandaAdapter(softDrinks);
+                recyclerView.setAdapter(adapterSoft);
             }
         });
 
-        // Add click listeners for other category buttons
+        Button vini = findViewById(R.id.btn_vini);
+        vini.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<Bevanda> vini = new ArrayList<>();
 
-        /*
+                for(Bevanda bevanda : productList){
+                    String categoria = bevanda.getCategoria().toString();
+                    Log.d("Categoria: ",categoria);
+                    if(categoria.equalsIgnoreCase(new Categoria("Vini").toString())) {
+                        vini.add(bevanda);
+                    }
+                }
+                BevandaAdapter adapterWine = new BevandaAdapter(vini);
+                recyclerView.setAdapter(adapterWine);
+            }
+        });
+
+        Button Alcolici = findViewById(R.id.btn_alcolici);
+        Alcolici.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<Bevanda> alcolici = new ArrayList<>();
+
+                for(Bevanda bevanda : productList){
+                    String categoria = bevanda.getCategoria().toString();
+                    Log.d("Categoria: ",categoria);
+                    if(categoria.equalsIgnoreCase(new Categoria("Alcolici").toString())) {
+                        alcolici.add(bevanda);
+                    }
+                }
+                BevandaAdapter adapterAlcolici = new BevandaAdapter(alcolici);
+                recyclerView.setAdapter(adapterAlcolici);
+            }
+        });
+
+
+        Button analcolici = findViewById(R.id.btn_analcolici);
+        analcolici.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<Bevanda> analcolici = new ArrayList<>();
+
+                for(Bevanda bevanda : productList){
+                    String categoria = bevanda.getCategoria().toString();
+                    Log.d("Categoria: ",categoria);
+                    if(categoria.equalsIgnoreCase(new Categoria("Analcolici").toString())) {
+                        analcolici.add(bevanda);
+                    }
+                }
+                BevandaAdapter adapterAnalcolici = new BevandaAdapter(analcolici);
+                recyclerView.setAdapter(adapterAnalcolici);
+            }
+        });
+
+/*
         Button all = findViewById(R.id.allDrinksButton);
         all.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,8 +173,8 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
                 // You can call methods from the controller to handle business logic
             }
         });
+*/
 
-         */
     }
 
     @Override

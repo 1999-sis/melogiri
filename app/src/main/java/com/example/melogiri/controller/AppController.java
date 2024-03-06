@@ -5,6 +5,7 @@ import static androidx.core.content.ContextCompat.startActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.melogiri.model.SocketAPI;
 import com.example.melogiri.model.Utente;
@@ -52,9 +53,17 @@ public class AppController implements Runnable
                 {
                     // Effettua il login sul server
                     Utente utente = socketAPI.login(email, password);
-                    Intent intent = new Intent(activity, HomePageActivity.class);
-                    activity.startActivity(intent);
-                    activity.finish(); // Finish the LoginActivity to prevent going back to it using the back button
+                    Log.d("utente",utente.toString());
+                    if(utente.getEmail()!=null) {
+                        Intent intent = new Intent(activity, HomePageActivity.class);
+                        intent.putExtra("nome", utente.getNome());
+                        intent.putExtra("cognome", utente.getCognome());
+                        intent.putExtra("email", utente.getEmail());
+                        activity.startActivity(intent);
+                        activity.finish(); // Finish the LoginActivity to prevent going back to it using the back button
+                    }else{
+                        //Toast toast = Toast.makeText(activity,"Email/Password Errati",Toast.LENGTH_SHORT);
+                    }
                 }
                 catch (JSONException e)
                 {

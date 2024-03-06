@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHolder> {
 
-    private final RecycleViewInterface recycleViewInterface;
+    private RecycleViewInterface recycleViewInterface;
     private List<Bevanda> productList;
     private Carrello carrello;
 
@@ -24,8 +24,8 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
         this.recycleViewInterface = recycleViewInterface;
     }
 
-    public BevandaAdapter(List<Bevanda> productList, com.example.melogiri.view.HomePageActivity homePageActivity) {
-        recycleViewInterface = null;
+    public BevandaAdapter(List<Bevanda> productList) {
+        this.productList = productList;
     }
 
     @NonNull
@@ -58,15 +58,8 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return 0;
-    }
-
-    /*
-    @Override
-    public int getItemCount() {
         return productList.size();
     }
-*/
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView productNameTextView;
