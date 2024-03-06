@@ -1,8 +1,12 @@
 package com.example.melogiri.controller;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 import com.example.melogiri.util.SocketAPI;
+import com.example.melogiri.view.LoginActivity;
 import com.example.melogiri.view.RegisterActivity;
 
 
@@ -21,9 +25,20 @@ public class ControllerRegister
                     Log.d("REGISTER_UTENTE", response);
                     if(response.equalsIgnoreCase("Registration_Successful"))
                     {
-                        Toast.makeText(registerActivity.getApplicationContext(), "Registration_Successful", Toast.LENGTH_SHORT).show();
-                        //intent per ritornare al Login
+                        registerActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Mostra un Toast per indicare la registrazione avvenuta con successo
+                                Toast.makeText(registerActivity, "Registrazione avvenuta con successo", Toast.LENGTH_SHORT).show();
 
+                                // Avvia un'Intent per tornare all'Activity precedente
+                                Intent intent = new Intent(registerActivity, LoginActivity.class);
+                                registerActivity.startActivity(intent);
+
+                                // Chiudi l'Activity corrente
+                                registerActivity.finish();
+                            }
+                        });
                     }
 
                 }
