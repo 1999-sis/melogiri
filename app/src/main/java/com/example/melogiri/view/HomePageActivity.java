@@ -15,12 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.melogiri.R;
 import com.example.melogiri.controller.AppController;
 import com.example.melogiri.model.Bevanda;
-import com.example.melogiri.model.BevandaAdapter;
-import com.example.melogiri.view.CarrelloActivity;
+import com.example.melogiri.adapter.BevandaAdapter;
 import com.example.melogiri.model.Categoria;
 import com.example.melogiri.model.Utente;
-import com.example.melogiri.model.RecycleViewInterface;
-import com.example.melogiri.view.UtenteActivity;
+import com.example.melogiri.recycleView.RecycleViewInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -178,7 +176,8 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
     }
 
     @Override
-    public void onClickItem(int position) {
+    public void onClickItem(int position)
+    {
         // Handle click on a beverage item
         // You can call methods from the controller to handle business logic
     }

@@ -9,11 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.melogiri.controller.AppController;
 import com.example.melogiri.model.Bevanda;
-import com.example.melogiri.model.Carrello;
-import com.example.melogiri.model.CarrelloAdapter;
+import com.example.melogiri.adapter.CarrelloAdapter;
 import com.example.melogiri.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CarrelloActivity extends AppCompatActivity {
