@@ -3,13 +3,14 @@
     package="com.example.melogiri">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MeloGiri"
-
+        android:enableOnBackInvokedCallback="true"
         >
 
         <!-- Activities -->

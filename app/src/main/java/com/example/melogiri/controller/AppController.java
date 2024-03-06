@@ -44,10 +44,6 @@ public class AppController
                         activity.startActivity(intent);
                         activity.finish(); // Finish the LoginActivity to prevent going back to it using the back button
                     }
-                    else
-                    {
-                        Toast.makeText(activity, "L'utente non esiste", Toast.LENGTH_LONG).show();
-                    }
                 }
                 catch (JSONException e)
                 {

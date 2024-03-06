@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Bevanda implements Parcelable {
+    private int idBevanda;
     private String nome;
     private String urlPhoto;
     private int livelloAlcolico;
@@ -32,11 +33,15 @@ public class Bevanda implements Parcelable {
     }
 
     // Costruttore per le prove
-    public Bevanda(String nome, String descrizione, String urlPhoto, Categoria categoria) {
+    public Bevanda(int idBevanda,String nome,  String urlPhoto, int livelloAlcolico, String descrizione, Categoria categoria, int prezzo)
+    {
+        this.idBevanda = idBevanda;
         this.nome = nome;
-        this.descrizione = descrizione;
         this.urlPhoto = urlPhoto;
+        this.livelloAlcolico = livelloAlcolico;
+        this.descrizione = descrizione;
         this.categoria = categoria;
+        this.prezzo = prezzo;
     }
 
     public String getNome() {

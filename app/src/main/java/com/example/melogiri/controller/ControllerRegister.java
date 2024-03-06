@@ -1,10 +1,12 @@
 package com.example.melogiri.controller;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
+
 import com.example.melogiri.util.SocketAPI;
 import com.example.melogiri.view.LoginActivity;
 import com.example.melogiri.view.RegisterActivity;
@@ -50,5 +52,32 @@ public class ControllerRegister
         });
         thread.start();
 
+    }
+
+    public void showBiometricPrompt(LoginActivity loginActivity)
+    {
+        BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Biometric Authentication")
+                .setDescription("Please authenticate with your biometrics to continue")
+                .setDeviceCredentialAllowed(true)
+                .build();
+
+        BiometricPrompt biometricPrompt = new BiometricPrompt(loginActivity,
+                ContextCompat.getMainExecutor(loginActivity),
+                new BiometricPrompt.AuthenticationCallback() {
+                    @Override
+                    public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result)
+                    {
+                        super.onAuthenticationSucceeded(result);
+                    }
+
+                    @Override
+                    public void onAuthenticationFailed()
+                    {
+                        super.onAuthenticationFailed();
+                    }
+                });
+
+        biometricPrompt.authenticate(promptInfo);
     }
 }

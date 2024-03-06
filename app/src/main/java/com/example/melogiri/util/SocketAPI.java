@@ -2,8 +2,11 @@ package com.example.melogiri.util;
 
 import android.util.Log;
 
+import com.example.melogiri.model.Bevanda;
+import com.example.melogiri.model.Categoria;
 import com.example.melogiri.model.Utente;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -14,6 +17,9 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class SocketAPI {
 
@@ -26,12 +32,28 @@ public class SocketAPI {
         this.serverAddress = serverAddress;
         this.port = port;
     }
-    String getBevande() throws IOException
+    public List<Bevanda> getBevande() throws IOException, JSONException
     {
+        List<Bevanda> listaBevande = new ArrayList<>();
         String response = (createChannelSocket("3"));
-        //Creare la lista di Bevande
-        System.out.println(response);
-        return "ciao";
+        JSONArray jsonArray = new JSONArray(response);
+        for(int i = 0; i < jsonArray.length(); i++)
+        {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            // Estrai i campi dall'oggetto JSON
+            int idbevanda = jsonObject.getInt("idbevanda");
+            String nome = jsonObject.getString("nome");
+            String photo_url = jsonObject.getString("photo_url");
+            int livello_alcolico = jsonObject.getInt("livello_alcolico");
+            String descrizione = jsonObject.getString("descrizione");
+            Categoria categoria = new Categoria();
+            categoria.setCategoria(jsonObject.getString("categoria"));
+            int prezzo = jsonObject.getInt("prezzo");
+            Bevanda bevanda = new Bevanda(idbevanda, nome, photo_url, livello_alcolico,descrizione,categoria,prezzo);
+            listaBevande.add(bevanda);
+        }
+
+        return listaBevande;
     }
     public Utente login(String email, String password) throws JSONException, IOException {
         String message = "1" + email + "&$" + password;

@@ -10,10 +10,6 @@
         android:title="Homepage"
         android:icon="@drawable/home" />
     <item
-        android:id="@+id/history"
-        android:title="History"
-        android:icon="@drawable/heart" />
-    <item
         android:id="@+id/carrello"
         android:title="Carrello"
         android:icon="@drawable/cart" />

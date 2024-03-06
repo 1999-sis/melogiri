@@ -4,13 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.melogiri.R;
 import com.example.melogiri.controller.AppController;
 import com.example.melogiri.controller.ControllerRegister;
 
 import java.sql.Date;
-
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 public class RegisterActivity extends AppCompatActivity
 {
 
@@ -41,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity
 
         // Call the register method of the app controller
         controllerRegister.register(this, nome, cognome, "1999-01-01", email, password);
-
-
     }
+
+
 }

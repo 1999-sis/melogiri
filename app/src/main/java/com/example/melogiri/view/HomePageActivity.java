@@ -14,11 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.melogiri.R;
 import com.example.melogiri.controller.AppController;
+import com.example.melogiri.controller.ControllerHomePage;
 import com.example.melogiri.model.Bevanda;
 import com.example.melogiri.adapter.BevandaAdapter;
 import com.example.melogiri.model.Categoria;
 import com.example.melogiri.model.Utente;
 import com.example.melogiri.recycleView.RecycleViewInterface;
+import com.example.melogiri.util.BevandeCallback;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +30,7 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
     private List<Bevanda> productList;
     private RecyclerView recyclerView;
     private BevandaAdapter adapter;
-    private AppController appController;
+
 
 
     @Override
@@ -55,30 +58,47 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);
+        ControllerHomePage controllerHomePage = new ControllerHomePage();
 
         Utente utente = new Utente();
         Intent intent = getIntent();
 
-        appController = new AppController(); // Instantiate the AppController
         utente.setNome(intent.getStringExtra("nome"));
         utente.setCognome(intent.getStringExtra("cognome"));
         utente.setEmail(intent.getStringExtra("email"));
+        BottomNavigationView navigationView = findViewById(R.id.bottomNavigator);
+        navigationView.setOnItemSelectedListener(item ->
+        {
+            switch(item.getItemId())
+            {
+                case R.id.profile:
+                    break;
+                case R.id.carrello:
+                    break;
+                case R.id.home:
+                    break;
+            }
+            return true;
+        });
 
         recyclerView = findViewById(R.id.rec_viewCard);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        productList = new ArrayList<>();
-        productList.add(new Bevanda("Prodotto 1", "Descrizione prodotto 1", "Da inserire URL", new Categoria("Alcolici")));
-        productList.add(new Bevanda("Prodotto 2", "Descrizione prodotto 2", "Da inserire URL", new Categoria("Soft Drink")));
-        productList.add(new Bevanda("Prodotto 3", "Descrizione prodotto 3", "Da inserire URL", new Categoria("Analcolici")));
-        productList.add(new Bevanda("Prodotto 4", "Descrizione prodotto 4", "Da inserire URL", new Categoria("Soft Drink")));
-        productList.add(new Bevanda("Prodotto 5", "Descrizione prodotto 5", "Da inserire URL", new Categoria("Alcolici")));
+        //ottenere le bevande dal server
+        controllerHomePage.getBevande(this,  new BevandeCallback()
+        {
+            @Override
+            public void onBevandeLoaded(List<Bevanda> productList) {
+                // Ricevi la productList qui e crea l'adapter e imposta il RecyclerView
+                adapter = new BevandaAdapter(productList);
+                recyclerView.setAdapter(adapter);
+            }
+        });
 
-        adapter = new BevandaAdapter(productList);
-        recyclerView.setAdapter(adapter);
 
         Button showCartBtn = findViewById(R.id.btnShowCart);
         showCartBtn.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +110,8 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
         });
 
         Button softDrink = findViewById(R.id.btn_softdrink);
-        softDrink.setOnClickListener(new View.OnClickListener() {
+        softDrink.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view) {
                 ArrayList<Bevanda> softDrinks = new ArrayList<>();

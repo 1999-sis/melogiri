@@ -30,6 +30,10 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
     public BevandaAdapter(List<Bevanda> productList) {
         this.productList = productList;
     }
+    public BevandaAdapter()
+    {
+
+    }
 
     @NonNull
     @Override
