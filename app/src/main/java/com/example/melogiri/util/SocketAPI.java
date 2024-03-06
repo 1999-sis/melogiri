@@ -21,11 +21,18 @@ public class SocketAPI {
     private int port;               // Server Port
     private static final String TAG = "SocketAPI";
     private Socket socket;
-    public SocketAPI(String serverAddress, int port) {
+    public SocketAPI(String serverAddress, int port)
+    {
         this.serverAddress = serverAddress;
         this.port = port;
     }
-
+    String getBevande() throws IOException
+    {
+        String response = (createChannelSocket("3"));
+        //Creare la lista di Bevande
+        System.out.println(response);
+        return "ciao";
+    }
     public Utente login(String email, String password) throws JSONException, IOException {
         String message = "1" + email + "&$" + password;
         String response = createChannelSocket(message);
