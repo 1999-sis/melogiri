@@ -6,33 +6,28 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.melogiri.R;
+import com.example.melogiri.controller.ControllerCarrello;
 import com.example.melogiri.model.Bevanda;
-import com.example.melogiri.model.Carrello;
 import com.example.melogiri.recycleView.RecycleViewInterface;
 import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHolder> {
 
     private RecycleViewInterface recycleViewInterface;
     private List<Bevanda> productList;
-    private Carrello carrello;
+    private ControllerCarrello controllerCarrello;
 
-    public BevandaAdapter(List<Bevanda> productList, Carrello carrello, RecycleViewInterface recycleViewInterface) {
+    public BevandaAdapter(List<Bevanda> productList, ControllerCarrello controllerCarrello, RecycleViewInterface recycleViewInterface) {
         this.productList = productList;
-        this.carrello = carrello;
+        this.controllerCarrello = controllerCarrello;
         this.recycleViewInterface = recycleViewInterface;
-    }
-
-    public BevandaAdapter(List<Bevanda> productList) {
-        this.productList = productList;
-    }
-    public BevandaAdapter()
-    {
-
     }
 
     @NonNull
@@ -57,7 +52,7 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
         holder.addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                carrello.aggiungiProdotto(bevanda);
+                controllerCarrello.aggiungiProdotto(bevanda);
                 notifyDataSetChanged();
             }
         });
@@ -88,8 +83,6 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
                         int pos = getAdapterPosition();
                         if (pos != RecyclerView.NO_POSITION) {
                             recycleViewInterface.onClickItem(pos);
-
-
                         }
                     }
                 }

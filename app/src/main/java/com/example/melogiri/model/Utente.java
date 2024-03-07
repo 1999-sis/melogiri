@@ -1,9 +1,10 @@
 package com.example.melogiri.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Utente
+public class Utente implements Serializable
 {
     private String nome;
     private String cognome;

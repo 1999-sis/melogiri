@@ -2,10 +2,9 @@ package com.example.melogiri.controller;
 
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.melogiri.util.SocketAPI;
 import com.example.melogiri.model.Utente;
+import com.example.melogiri.util.SocketAPI;
 import com.example.melogiri.view.HomePageActivity;
 import com.example.melogiri.view.LoginActivity;
 
@@ -38,9 +37,7 @@ public class AppController
                     if(utente.getEmail()!=null)
                     {
                         Intent intent = new Intent(activity, HomePageActivity.class);
-                        intent.putExtra("nome", utente.getNome());
-                        intent.putExtra("cognome", utente.getCognome());
-                        intent.putExtra("email", utente.getEmail());
+                        intent.putExtra("utente", utente);
                         activity.startActivity(intent);
                         activity.finish(); // Finish the LoginActivity to prevent going back to it using the back button
                     }
