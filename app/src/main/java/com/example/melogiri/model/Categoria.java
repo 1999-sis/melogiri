@@ -3,9 +3,12 @@ package com.example.melogiri.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-
 public class Categoria implements Parcelable {
+    public static final Categoria SOFT_DRINK = new Categoria("drinkanalcolici");
+    public static final Categoria ALCOLICI = new Categoria("Alcolici");
+    public static final Categoria ANALCOLICI = new Categoria("Analcolici");
+    public static final Categoria VINI = new Categoria("Vini");
+
     String categoria;
 
     public Categoria(String categoria) {

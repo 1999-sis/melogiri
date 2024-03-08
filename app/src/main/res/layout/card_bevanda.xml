@@ -1,153 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:layout_marginTop="5dp"
-    android:clickable="true"
-    android:focusable="true"
-    app:cardBackgroundColor="@color/material_dynamic_neutral_variant100"
-    app:cardCornerRadius="30dp"
-    app:cardElevation="50dp">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-
+        <!-- Product Name -->
         <TextView
             android:id="@+id/nomeBevanda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome"
-            android:textSize="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.796"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.038"></TextView>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/containerLivelloAlcolico"
-            android:layout_width="369dp"
-            android:layout_height="52dp"
-            android:layout_marginLeft="32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.778"
-            tools:ignore="MissingConstraints">
-
-            <TextView
-                android:id="@+id/txt_livello"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="Livello Alcolico:"
-                android:textSize="20dp"
-                app:layout_constraintBottom_toBottomOf="@id/addLivello"
-                app:layout_constraintLeft_toLeftOf="parent"></TextView>
-
-            <Button
-                android:id="@+id/addLivello"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="+"
-                app:layout_constraintBottom_toBottomOf="@id/txt_livello"
-                app:layout_constraintLeft_toRightOf="@id/txt_livello"
-                app:layout_constraintTop_toTopOf="@id/txt_livello"></Button>
-
-            <TextView
-                android:id="@+id/txt_valorelivello"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Livello"
-                app:layout_constraintBottom_toBottomOf="@id/addLivello"
-                app:layout_constraintLeft_toRightOf="@id/addLivello"
-                app:layout_constraintTop_toTopOf="@id/addLivello"></TextView>
-
-            <Button
-                android:id="@+id/removeLivello"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="-"
-                app:layout_constraintBottom_toBottomOf="@id/txt_valorelivello"
-                app:layout_constraintLeft_toRightOf="@id/txt_valorelivello"
-                app:layout_constraintTop_toTopOf="@id/txt_valorelivello"></Button>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="172dp"
-            android:layout_height="174dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.066"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.079"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Aggiungi al carrello"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:layout_constraintVertical_bias="0.897" />
-
-        <TextView
-            android:id="@+id/edt_categoria"
-            android:layout_width="136dp"
-            android:layout_height="39dp"
-            android:text="CATEGORIA"
-
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.843"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.214"></TextView>
-
+        <!-- Product Description -->
         <TextView
             android:id="@+id/descrizione"
-            android:layout_width="201dp"
-            android:layout_height="77dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.923"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.479" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Descrizione"
+            android:textSize="14sp" />
 
+        <!-- Product Image -->
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_launcher_background" />
 
-        <!--<ImageView
-            android:id="@+id/imageView"
+        <!-- Add to Cart Button -->
+        <Button
+            android:id="@+id/buttonAggiungiAlCarrello"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            android:text="Aggiungi al carrello" />
 
-            tools:srcCompat="@tools:sample/avatars" />-->
+        <!-- Remove from Cart Button -->
+        <Button
+            android:id="@+id/removeLivello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Rimuovi dal carrello"
+            android:visibility="gone" />
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

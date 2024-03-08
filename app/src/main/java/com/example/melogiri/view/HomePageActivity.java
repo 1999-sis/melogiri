@@ -5,8 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,19 +17,21 @@ import com.example.melogiri.adapter.BevandaAdapter;
 import com.example.melogiri.controller.ControllerCarrello;
 import com.example.melogiri.controller.ControllerHomePage;
 import com.example.melogiri.model.Bevanda;
+import com.example.melogiri.model.Categoria;
 import com.example.melogiri.model.Utente;
 import com.example.melogiri.recycleView.RecycleViewInterface;
 import com.example.melogiri.util.BevandeCallback;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomePageActivity extends AppCompatActivity implements RecycleViewInterface {
-
     private List<Bevanda> productList;
     private RecyclerView recyclerView;
     private BevandaAdapter adapter;
     private ControllerCarrello controllerCarrello;
+    private boolean isCartView = false; // Flag to indicate if the adapter is being used in cart view
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,32 +61,31 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.homepage);
-
         ControllerHomePage controllerHomePage = new ControllerHomePage();
-        Utente utente;
+
+        Utente utente = new Utente();
         Intent intent = getIntent();
+
         utente = (Utente) intent.getSerializableExtra("utente");
+
         Log.d("Utente in HomePage: ", utente.toString());
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigator);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.profile:
-                        // Handle profile click
-                        return true;
-                    case R.id.carrello:
-                        // Handle cart click
-                        Intent cartIntent = new Intent(HomePageActivity.this, CarrelloActivity.class);
-                        startActivity(cartIntent);
-                        return true;
-                    case R.id.home:
-                        // Handle home click
-                        return true;
-                }
-                return false;
+        BottomNavigationView navigationView = findViewById(R.id.bottomNavigator);
+        navigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.profile:
+                    // Handle profile navigation
+                    break;
+                case R.id.carrello:
+                    // Open CarrelloActivity when "Carrello" is pressed
+                    Intent carrelloIntent = new Intent(HomePageActivity.this, CarrelloActivity.class);
+                    startActivity(carrelloIntent);
+                    return true; // Return true to indicate that the item is selected
+                case R.id.home:
+                    // Handle home navigation
+                    break;
             }
+            return false; // Return false if the item is not selected
         });
 
         recyclerView = findViewById(R.id.rec_viewCard);
@@ -94,10 +96,82 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
         controllerHomePage.getBevande(this, new BevandeCallback() {
             @Override
             public void onBevandeLoaded(List<Bevanda> productList) {
-                adapter = new BevandaAdapter(productList, controllerCarrello, HomePageActivity.this);
+                adapter = new BevandaAdapter(productList, controllerCarrello, HomePageActivity.this, isCartView);
                 recyclerView.setAdapter(adapter);
 
                 Log.d("Product List", productList.toString());
+
+                Button softDrink = findViewById(R.id.btn_softdrink);
+                softDrink.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ArrayList<Bevanda> softDrinks = new ArrayList<>();
+
+                        for (Bevanda bevanda : productList) {
+                            String categoria = bevanda.getCategoria().toString();
+                            Log.d("Categoria: ", categoria);
+                            if (categoria.equalsIgnoreCase(new Categoria("Soft Drink").toString())) {
+                                softDrinks.add(bevanda);
+                            }
+                        }
+                        BevandaAdapter adapterSoft = new BevandaAdapter(softDrinks, controllerCarrello, HomePageActivity.this, isCartView);
+                        recyclerView.setAdapter(adapterSoft);
+                    }
+                });
+
+                Button vini = findViewById(R.id.btn_vini);
+                vini.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ArrayList<Bevanda> vini = new ArrayList<>();
+
+                        for (Bevanda bevanda : productList) {
+                            String categoria = bevanda.getCategoria().toString();
+                            Log.d("Categoria: ", categoria);
+                            if (categoria.equalsIgnoreCase(new Categoria("Vini").toString())) {
+                                vini.add(bevanda);
+                            }
+                        }
+                        BevandaAdapter adapterWine = new BevandaAdapter(vini, controllerCarrello, HomePageActivity.this, isCartView);
+                        recyclerView.setAdapter(adapterWine);
+                    }
+                });
+
+                Button Alcolici = findViewById(R.id.btn_alcolici);
+                Alcolici.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ArrayList<Bevanda> alcolici = new ArrayList<>();
+
+                        for (Bevanda bevanda : productList) {
+                            String categoria = bevanda.getCategoria().toString();
+                            Log.d("Categoria: ", categoria);
+                            if (categoria.equalsIgnoreCase(new Categoria("Alcolici").toString())) {
+                                alcolici.add(bevanda);
+                            }
+                        }
+                        BevandaAdapter adapterAlcolici = new BevandaAdapter(alcolici, controllerCarrello, HomePageActivity.this, isCartView);
+                        recyclerView.setAdapter(adapterAlcolici);
+                    }
+                });
+
+                Button analcolici = findViewById(R.id.btn_analcolici);
+                analcolici.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ArrayList<Bevanda> analcolici = new ArrayList<>();
+
+                        for (Bevanda bevanda : productList) {
+                            String categoria = bevanda.getCategoria().toString();
+                            Log.d("Categoria: ", categoria);
+                            if (categoria.equalsIgnoreCase(new Categoria("Analcolici").toString())) {
+                                analcolici.add(bevanda);
+                            }
+                        }
+                        BevandaAdapter adapterAnalcolici = new BevandaAdapter(analcolici, controllerCarrello, HomePageActivity.this, isCartView);
+                        recyclerView.setAdapter(adapterAnalcolici);
+                    }
+                });
             }
         });
     }

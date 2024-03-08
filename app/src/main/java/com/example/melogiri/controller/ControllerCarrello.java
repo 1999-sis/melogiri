@@ -1,19 +1,16 @@
 package com.example.melogiri.controller;
 
-import android.util.Log;
-
 import com.example.melogiri.model.Bevanda;
-import com.example.melogiri.model.Carrello;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControllerCarrello {
     private static ControllerCarrello instance;
-    private Carrello carrello;
+    private List<Bevanda> productList;
 
     private ControllerCarrello() {
-        // Inizializza il carrello
-        carrello = new Carrello();
+        productList = new ArrayList<>();
     }
 
     public static synchronized ControllerCarrello getInstance() {
@@ -23,21 +20,15 @@ public class ControllerCarrello {
         return instance;
     }
 
-    public void aggiungiProdotto(Bevanda prodotto) {
-        carrello.aggiungiProdotto(prodotto);
-        Log.d("ControllerCarrello", "Prodotto aggiunto al carrello: " + prodotto.getNome());
+    public void aggiungiProdotto(Bevanda bevanda) {
+        productList.add(bevanda);
     }
 
-    public void rimuoviProdotto(Bevanda prodotto) {
-        carrello.rimuoviProdotto(prodotto);
-        Log.d("ControllerCarrello", "Prodotto rimosso dal carrello: " + prodotto.getNome());
-    }
-
-    public boolean contieneProdotto(Bevanda prodotto) {
-        return carrello.contieneProdotto(prodotto);
+    public void rimuoviProdotto(Bevanda bevanda) {
+        productList.remove(bevanda);
     }
 
     public List<Bevanda> getProdotti() {
-        return carrello.getProdotti();
+        return productList;
     }
 }
