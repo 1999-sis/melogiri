@@ -11,6 +11,17 @@
         <entry key="..\:/Users/Carmi/AndroidStudioProjects/MeloGiri/app/src/main/res/layout/activity_register.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Carmi/AndroidStudioProjects/MeloGiri/app/src/main/res/layout/card_bevanda.xml" value="0.33" />
         <entry key="..\:/Users/Carmi/AndroidStudioProjects/MeloGiri/app/src/main/res/layout/homepage.xml" value="0.1503623188405797" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/appmelogiri/app/src/main/res/layout/activity_bevanda_description.xml" value="0.25" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/appmelogiri/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/appmelogiri/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/appmelogiri/app/src/main/res/layout/activity_utente.xml" value="0.25" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/appmelogiri/app/src/main/res/layout/bottom_menu.xml" value="0.25" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/appmelogiri/app/src/main/res/layout/card_bevanda.xml" value="0.264" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/appmelogiri/app/src/main/res/layout/carrello_activity.xml" value="0.25" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/appmelogiri/app/src/main/res/layout/fragment_carrello.xml" value="0.25" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/appmelogiri/app/src/main/res/layout/homepage.xml" value="0.536" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/appmelogiri/app/src/main/res/layout/top_menu.xml" value="0.25" />
+        <entry key="..\:/Users/andre/AndroidStudioProjects/appmelogiri/app/src/main/res/menu/menuhompage.xml" value="0.25" />
         <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/drawable/button_border.xml" value="0.1" />
         <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/activity_bevanda_description.xml" value="0.22" />
         <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/activity_login.xml" value="0.3333333333333333" />
@@ -22,11 +33,9 @@
         <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/homepage.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/layout/top_menu.xml" value="0.264" />
         <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/MeloGiri-master/MeloGiri-master/app/src/main/res/menu/menuhompage.xml" value="0.264" />
-        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/melogiri/app/src/main/res/layout/activity_fragment.xml" value="0.1" />
         <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/melogiri/app/src/main/res/layout/activity_utente.xml" value="0.1" />
         <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/melogiri/app/src/main/res/layout/bottom_menu.xml" value="0.1" />
         <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/melogiri/app/src/main/res/layout/card_bevanda.xml" value="0.17135416666666667" />
-        <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/melogiri/app/src/main/res/layout/fragment_carrello.xml" value="0.1" />
         <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/melogiri/app/src/main/res/layout/homepage.xml" value="0.1" />
         <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/melogiri/app/src/main/res/layout/top_menu.xml" value="0.1" />
         <entry key="..\:/Users/gianluca.leone/AndroidStudioProjects/melogiri/app/src/main/res/menu/menuhompage.xml" value="0.1" />
