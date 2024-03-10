@@ -19,27 +19,105 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nome"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <!-- Product Description -->
         <TextView
-            android:id="@+id/descrizione"
+            android:id="@+id/categoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Descrizione"
-            android:textSize="14sp" />
+            android:text="Categoria"
+            android:textSize="18sp" />
+
+        <!-- Alcohol Level -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <!-- Star Rating -->
+
+            <TextView
+                android:id="@+id/livelloAlcolico"
+                android:layout_width="wrap_content"
+                android:layout_height="37dp"
+                android:text="Livello alcolico"
+                android:textSize="18sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:rating="1"
+                android:stepSize="1" />
+        </LinearLayout>
 
         <!-- Product Image -->
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="361dp"
+            android:layout_height="259dp"
             android:layout_marginTop="8dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/carddrink" />
+
+        <!-- Quantity Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Quantity Label -->
+            <TextView
+                android:id="@+id/quantitaLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quantità"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- Decrement Button -->
+            <Button
+                android:id="@+id/buttonDecrement"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:backgroundTint="#FF0000" />
+
+            <!-- Quantity TextView -->
+            <TextView
+                android:id="@+id/quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="14sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp" />
+
+            <!-- Increment Button -->
+            <Button
+                android:id="@+id/buttonIncrement"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:backgroundTint="#00FF00" />
+        </LinearLayout>
+
+        <!-- Prezzo -->
+        <TextView
+            android:id="@+id/prezzo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prezzo: $5.99"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <!-- Add to Cart Button -->
         <Button
@@ -48,15 +126,5 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Aggiungi al carrello" />
-
-        <!-- Remove from Cart Button -->
-        <Button
-            android:id="@+id/removeLivello"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Rimuovi dal carrello"
-            android:visibility="gone" />
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>
