@@ -119,7 +119,9 @@ public class SocketAPI {
         }
         finally
         {
-            socket.close();
+            if(socket != null) {
+                socket.close();
+            }
         }
 
         return response;

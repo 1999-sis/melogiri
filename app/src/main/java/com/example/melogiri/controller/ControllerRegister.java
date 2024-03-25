@@ -72,6 +72,7 @@ public class ControllerRegister {
                 .setSubtitle("Please use your biometric credentials to log in")
                 .setConfirmationRequired(true)
                 .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG)
+                .setNegativeButtonText("Cancel")
                 .build();
 
         BiometricPrompt biometricPrompt = new BiometricPrompt(loginActivity,

@@ -100,7 +100,7 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
             productDescriptionTextView = itemView.findViewById(R.id.descrizione);
             productImage = itemView.findViewById(R.id.imageView2);
             addToCartButton = itemView.findViewById(R.id.buttonAggiungiAlCarrello);
-            removeFromCartButton = itemView.findViewById(R.id.removeLivello);
+           // removeFromCartButton = itemView.findViewById(R.id.removeLivello);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
