@@ -1,139 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:layout_margin="20dp"
+    android:background="#e9e9e9"
+    android:layout_marginBottom="5dp"
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/nomeBevanda"
+        android:text="Test"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="10dp"
+        android:padding="7dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        />
+    <TextView
+        android:id="@+id/categoria"
+        android:text="Categoria Bevanda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/nomeBevanda"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/descrizione"
+        android:text="Lorem ipsum dolor sit amet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/categoria"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/livelloAlcolico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Livello Alcolico"
+        app:layout_constraintTop_toBottomOf="@id/descrizione"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        />
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBar"
+        app:layout_constraintTop_toBottomOf="@id/livelloAlcolico"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/containerBarQuantity"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+     <androidx.constraintlayout.widget.ConstraintLayout
+         android:layout_width="200dp"
+         android:layout_height="wrap_content"
+         >
+         <Button
+             android:layout_width="40dp"
+             android:layout_height="wrap_content"
+             android:text="-"
+             android:backgroundTint="#ff0000"
+             android:id="@+id/buttonDecrement"
+             app:layout_constraintLeft_toLeftOf="parent"
+             android:padding="10dp"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintBottom_toBottomOf="parent"
+             />
+         <Button
+             android:layout_width="40dp"
+             android:layout_height="wrap_content"
+             android:text="+"
+             android:backgroundTint="#00ff00"
+             android:id="@+id/buttonIncrement"
+             app:layout_constraintRight_toRightOf="parent"
+             android:padding="10dp"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintBottom_toBottomOf="parent"
+             />
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:id="@+id/quantity"
+             android:text="1"
+             android:textSize="20sp"
+             app:layout_constraintRight_toRightOf="parent"
+             app:layout_constraintLeft_toLeftOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintBottom_toBottomOf="parent"
+             tools:ignore="MissingConstraints"
 
-        <!-- Product Name -->
-        <TextView
-            android:id="@+id/nomeBevanda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nome"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+             />
+     </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Product Description -->
-        <TextView
-            android:id="@+id/categoria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Categoria"
-            android:textSize="18sp" />
+    </FrameLayout>
 
-        <!-- Product Description -->
-        <TextView
-            android:id="@+id/descrizione"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Descrizione del prodotto"
-            android:textSize="16sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/prezzo"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Prezzo"
+        app:layout_constraintTop_toBottomOf="@+id/containerBarQuantity"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAggiungiAlCarrello"
+        app:layout_constraintTop_toBottomOf="@id/prezzo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Aggiungi Carello"
+        />
 
-        <!-- Alcohol Level -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
 
-            <!-- Star Rating -->
-
-            <TextView
-                android:id="@+id/livelloAlcolico"
-                android:layout_width="wrap_content"
-                android:layout_height="37dp"
-                android:text="Livello alcolico"
-                android:textSize="18sp" />
-
-            <RatingBar
-                android:id="@+id/ratingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:rating="1"
-                android:stepSize="1" />
-        </LinearLayout>
-
-        <!-- Product Image -->
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="361dp"
-            android:layout_height="259dp"
-            android:layout_marginTop="8dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/carddrink" />
-
-        <!-- Quantity Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <!-- Quantity Label -->
-            <TextView
-                android:id="@+id/quantitaLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Quantità"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <!-- Decrement Button -->
-            <Button
-                android:id="@+id/buttonDecrement"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:backgroundTint="#FF0000" />
-
-            <!-- Quantity TextView -->
-            <TextView
-                android:id="@+id/quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:textSize="14sp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp" />
-
-            <!-- Increment Button -->
-            <Button
-                android:id="@+id/buttonIncrement"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:text="+"
-                android:backgroundTint="#00FF00" />
-        </LinearLayout>
-
-        <!-- Prezzo -->
-        <TextView
-            android:id="@+id/prezzo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Prezzo: $5.99"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <!-- Add to Cart Button -->
-        <Button
-            android:id="@+id/buttonAggiungiAlCarrello"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Aggiungi al carrello" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

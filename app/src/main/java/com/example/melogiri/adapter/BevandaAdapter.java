@@ -52,8 +52,8 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
         holder.productDescriptionTextView.setText(bevanda.getDescrizione());
 
         Picasso.get()
-                .load(bevanda.getUrlPhoto())
-                .resize(50, 50)
+                .load(R.drawable.carddrink)
+                .resize(600,600)
                 .centerCrop()
                 .into(holder.productImage);
 
