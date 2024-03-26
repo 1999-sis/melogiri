@@ -45,7 +45,8 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
+    {
         Bevanda bevanda = productList.get(position);
         holder.productNameTextView.setText(bevanda.getNome());
         holder.productDescriptionTextView.setText(bevanda.getDescrizione());
@@ -62,7 +63,7 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
             holder.removeFromCartButton.setVisibility(View.VISIBLE);
         } else {
             holder.addToCartButton.setVisibility(View.VISIBLE);
-            holder.removeFromCartButton.setVisibility(View.GONE);
+            //holder.removeFromCartButton.setVisibility(View.GONE);
         }
 
         holder.addToCartButton.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +74,7 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
             }
         });
 
+        /*
         holder.removeFromCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +82,8 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
                 notifyDataSetChanged();
             }
         });
+
+         */
     }
 
     @Override
@@ -100,7 +104,7 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
             productDescriptionTextView = itemView.findViewById(R.id.descrizione);
             productImage = itemView.findViewById(R.id.imageView2);
             addToCartButton = itemView.findViewById(R.id.buttonAggiungiAlCarrello);
-           // removeFromCartButton = itemView.findViewById(R.id.removeLivello);
+            //removeFromCartButton = itemView.findViewById(R.id.removeLivello);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
