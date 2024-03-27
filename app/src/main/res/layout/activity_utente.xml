@@ -3,28 +3,110 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.131"
-        tools:srcCompat="@tools:sample/avatars" />
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome Utente"
+        android:id="@+id/email2"
+        android:layout_width="172dp"
+        android:layout_height="21dp"
+        android:text="Email Utente"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataDiNascita3"
+        app:layout_constraintVertical_bias="0.047" />
+
+    <TextView
+        android:id="@+id/dataDiNascita3"
+        android:layout_width="170dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="24dp"
+        android:text="Data di nascita"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/dataDiNascita"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cognomeUtente3" />
+
+    <TextView
+        android:id="@+id/cognomeUtente3"
+        android:layout_width="181dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:text="Cognome Utente"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomeUtente3" />
+
+    <TextView
+        android:id="@+id/nomeUtente3"
+        android:layout_width="169dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="204dp"
+        android:layout_marginEnd="4dp"
+        android:text="Nome Utente"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/nomeUtente"
+        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewProfile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/login_faceid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.013" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nomeUtente"
+        android:layout_width="169dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="4dp"
+        android:text="Nome Utente"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/cognomeUtente"
+        android:layout_width="181dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Cognome Utente"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomeUtente" />
+
+    <TextView
+        android:id="@+id/dataDiNascita"
+        android:layout_width="170dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:text="N/D"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cognomeUtente" />
+
+    <TextView
+        android:id="@+id/Email"
+        android:layout_width="172dp"
+        android:layout_height="21dp"
+        android:layout_marginEnd="16dp"
+        android:text="Email Utente"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataDiNascita"
+        app:layout_constraintVertical_bias="0.049" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

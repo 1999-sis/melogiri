@@ -20,7 +20,7 @@ public class UtenteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_utente);
 
-        textViewNome = findViewById(R.id.textView3);
+        textViewNome = findViewById(R.id.nomeUtente);
         appController = new AppController();
 
         Intent intent = getIntent();

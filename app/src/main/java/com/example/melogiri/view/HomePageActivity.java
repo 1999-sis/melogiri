@@ -23,6 +23,7 @@ import com.example.melogiri.recycleView.RecycleViewInterface;
 import com.example.melogiri.util.BevandeCallback;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,10 +72,15 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
         Log.d("Utente in HomePage: ", utente.toString());
 
         BottomNavigationView navigationView = findViewById(R.id.bottomNavigator);
+        Utente finalUtente = utente;
+
         navigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.profile:
                     // Handle profile navigation
+                    Intent profiloIntent = new Intent(HomePageActivity.this, ProfileActivity.class);
+                    profiloIntent.putExtra("utente", finalUtente);
+                    startActivity(profiloIntent);
                     break;
                 case R.id.carrello:
                     // Open CarrelloActivity when "Carrello" is pressed
@@ -110,7 +116,7 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
                         for (Bevanda bevanda : productList) {
                             String categoria = bevanda.getCategoria().toString();
                             Log.d("Categoria: ", categoria);
-                            if (categoria.equalsIgnoreCase(new Categoria("Soft Drink").toString())) {
+                            if (categoria.equalsIgnoreCase(new Categoria("drinkanalcolici").toString())) {
                                 softDrinks.add(bevanda);
                             }
                         }
@@ -146,7 +152,7 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
                         for (Bevanda bevanda : productList) {
                             String categoria = bevanda.getCategoria().toString();
                             Log.d("Categoria: ", categoria);
-                            if (categoria.equalsIgnoreCase(new Categoria("Alcolici").toString())) {
+                            if (categoria.equalsIgnoreCase(new Categoria("drinkalcolici").toString())) {
                                 alcolici.add(bevanda);
                             }
                         }

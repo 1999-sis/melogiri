@@ -29,6 +29,8 @@
         <activity android:name=".view.CarrelloActivity" />
         <activity android:name=".view.UtenteActivity" />
         <activity android:name=".view.BevandaDescriptionActivity" />
+        <activity android:name=".view.ProfileActivity" />
+
 
         <!-- Controller Activities (if any) -->
         <!-- No specific declaration needed for controller activities -->
