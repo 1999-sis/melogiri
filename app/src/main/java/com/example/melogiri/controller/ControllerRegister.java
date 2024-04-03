@@ -81,6 +81,7 @@ public class ControllerRegister {
             public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 // L'autenticazione è riuscita, puoi procedere con il login.
+                Log.d("FACE_ID", "Corretto " + result.getAuthenticationType());
             }
 
             @Override
