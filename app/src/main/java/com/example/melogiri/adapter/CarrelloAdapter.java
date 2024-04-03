@@ -31,7 +31,8 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
+    {
         Bevanda prodotto = prodottiCarrello.get(position);
         holder.productNameTextView.setText(prodotto.getNome());
         holder.productDescriptionTextView.setText(prodotto.getDescrizione());

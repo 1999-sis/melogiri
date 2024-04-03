@@ -23,12 +23,19 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCart"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewCartTitle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Acquista"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

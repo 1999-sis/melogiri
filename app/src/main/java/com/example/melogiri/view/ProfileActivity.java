@@ -31,7 +31,8 @@ public class ProfileActivity extends AppCompatActivity {
         TextView textViewCognomeUtente = findViewById(R.id.cognomeUtente);
         textViewCognomeUtente.setText(utente.getCognome());
 
-        if(null!=utente.getData()){
+        if(null!=utente.getData())
+        {
             TextView textViewDataNascita = findViewById(R.id.dataDiNascita);
             textViewDataNascita.setText((CharSequence) utente.getData());
         }

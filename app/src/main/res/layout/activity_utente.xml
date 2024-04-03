@@ -13,100 +13,101 @@
         android:layout_height="21dp"
         android:text="Email Utente"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Email"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataDiNascita3"
-        app:layout_constraintVertical_bias="0.047" />
+        app:layout_constraintTop_toBottomOf="@id/dataDiNascita"
+        android:layout_marginTop="20dp"
+
+        />
 
     <TextView
         android:id="@+id/dataDiNascita3"
         android:layout_width="170dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Data di nascita"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/dataDiNascita"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cognomeUtente3" />
+        app:layout_constraintTop_toBottomOf="@id/cognomeUtente3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
 
     <TextView
         android:id="@+id/cognomeUtente3"
         android:layout_width="181dp"
         android:layout_height="29dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:text="Cognome Utente"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomeUtente3" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomeUtente3"
+
+        />
 
     <TextView
         android:id="@+id/nomeUtente3"
         android:layout_width="169dp"
         android:layout_height="21dp"
-        android:layout_marginTop="204dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginTop="20dp"
         android:text="Nome Utente"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/nomeUtente"
-        app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewProfile"
+        />
 
     <ImageView
         android:id="@+id/imageViewProfile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/login_faceid"
+        android:src="@drawable/avatar_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/nomeUtente"
         android:layout_width="169dp"
         android:layout_height="21dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="4dp"
-        android:text="Nome Utente"
+        android:layout_marginLeft="13dp"
+        android:text="value_nomeutente"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/nomeUtente3"
+        app:layout_constraintBottom_toBottomOf="@id/nomeUtente3"
+        app:layout_constraintLeft_toRightOf="@id/nomeUtente3"
+        />
 
     <TextView
         android:id="@+id/cognomeUtente"
         android:layout_width="181dp"
         android:layout_height="29dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="Cognome Utente"
+        android:text="value_cognome"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomeUtente" />
+        app:layout_constraintTop_toTopOf="@id/cognomeUtente3"
+        app:layout_constraintBottom_toBottomOf="@id/cognomeUtente3"
+        app:layout_constraintLeft_toRightOf="@id/cognomeUtente3"
+        />
 
     <TextView
         android:id="@+id/dataDiNascita"
         android:layout_width="170dp"
         android:layout_height="23dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="20dp"
         android:text="N/D"
+        android:layout_marginLeft="10dp"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cognomeUtente" />
+        app:layout_constraintTop_toTopOf="@id/dataDiNascita3"
+        app:layout_constraintBottom_toBottomOf="@id/dataDiNascita3"
+        app:layout_constraintLeft_toRightOf="@id/dataDiNascita3"
+        />
 
     <TextView
         android:id="@+id/Email"
         android:layout_width="172dp"
         android:layout_height="21dp"
-        android:layout_marginEnd="16dp"
-        android:text="Email Utente"
+        android:text="value_email"
+        android:layout_marginLeft="7dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataDiNascita"
-        app:layout_constraintVertical_bias="0.049" />
+        app:layout_constraintTop_toTopOf="@id/email2"
+        app:layout_constraintBottom_toBottomOf="@id/email2"
+        app:layout_constraintLeft_toRightOf="@id/email2"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
