@@ -8,7 +8,7 @@ public class Utente implements Serializable
 {
     private String nome;
     private String cognome;
-    private Date data;
+    private String data;
     private String email;
     private String password;
     private List<Ordine> ordini;
@@ -49,11 +49,11 @@ public class Utente implements Serializable
     {
         this.cognome = cognome;
     }
-    public Date getData()
+    public String getData()
     {
         return data;
     }
-    public void setData(Date data)
+    public void setData(String data)
     {
         this.data = data;
     }

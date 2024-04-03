@@ -74,7 +74,7 @@ public class SocketAPI {
         utente.setCognome(jsonObject.getString("cognome"));
         utente.setEmail(jsonObject.getString("email"));
         utente.setPassword(jsonObject.getString("password"));
-
+        utente.setData(jsonObject.getString("data_di_nascita"));
         return utente;
     }
 
