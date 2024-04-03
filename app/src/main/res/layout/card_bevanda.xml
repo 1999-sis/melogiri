@@ -57,14 +57,15 @@
         android:layout_margin="10dp"
         android:padding="10dp"
         />
-    <androidx.appcompat.widget.AppCompatRatingBar
+    <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ratingBar"
+        android:isIndicator="true"
         app:layout_constraintTop_toBottomOf="@id/livelloAlcolico"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        tools:ignore="ExtraText" />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

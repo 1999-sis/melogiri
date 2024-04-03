@@ -1,13 +1,16 @@
 package com.example.melogiri.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.melogiri.R;
@@ -16,7 +19,10 @@ import com.example.melogiri.model.Bevanda;
 import com.example.melogiri.recycleView.RecycleViewInterface;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
+import java.util.Locale;
 
 public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHolder> {
 
@@ -44,12 +50,16 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position)
     {
         Bevanda bevanda = productList.get(position);
         holder.productNameTextView.setText(bevanda.getNome());
         holder.productDescriptionTextView.setText(bevanda.getDescrizione());
+        holder.livelloAlcolicoRatingBar.setRating((float) bevanda.getLivelloAlcolico());
+        holder.prezzoTextView.setText(String.valueOf(bevanda.getPrezzo()) + " euro");
+        holder.categoriaView.setText((bevanda.getCategoria().getCategoria()));
 
         Picasso.get()
                 .load(R.drawable.carddrink)
@@ -92,6 +102,9 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView categoriaView;
+        TextView prezzoTextView;
+        RatingBar livelloAlcolicoRatingBar;
         TextView productNameTextView;
         TextView productDescriptionTextView;
         ImageView productImage;
@@ -104,6 +117,9 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
             productDescriptionTextView = itemView.findViewById(R.id.descrizione);
             productImage = itemView.findViewById(R.id.imageView2);
             addToCartButton = itemView.findViewById(R.id.buttonAggiungiAlCarrello);
+            categoriaView=itemView.findViewById(R.id.categoria);
+            prezzoTextView=itemView.findViewById(R.id.prezzo);
+            livelloAlcolicoRatingBar=itemView.findViewById(R.id.ratingBar);
             //removeFromCartButton = itemView.findViewById(R.id.removeLivello);
 
             itemView.setOnClickListener(new View.OnClickListener() {
