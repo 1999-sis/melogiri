@@ -26,7 +26,7 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_bevanda, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_bevanda_carrello, parent, false);
         return new ViewHolder(view);
     }
 
