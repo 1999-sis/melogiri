@@ -1,5 +1,7 @@
 package com.example.melogiri.controller;
 
+import android.widget.Toast;
+
 import com.example.melogiri.model.Bevanda;
 
 import java.util.ArrayList;
@@ -20,8 +22,10 @@ public class ControllerCarrello {
         return instance;
     }
 
-    public void aggiungiProdotto(Bevanda bevanda) {
+    public void aggiungiProdotto(Bevanda bevanda)
+    {
         productList.add(bevanda);
+
     }
 
     public void rimuoviProdotto(Bevanda bevanda) {
