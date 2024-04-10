@@ -116,7 +116,7 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
                         for (Bevanda bevanda : productList) {
                             String categoria = bevanda.getCategoria().toString();
                             Log.d("Categoria: ", categoria);
-                            if (categoria.equalsIgnoreCase(new Categoria("drinkanalcolici").toString())) {
+                            if (categoria.equalsIgnoreCase(new Categoria("softdrink").toString())) {
                                 softDrinks.add(bevanda);
                             }
                         }
@@ -134,7 +134,7 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
                         for (Bevanda bevanda : productList) {
                             String categoria = bevanda.getCategoria().toString();
                             Log.d("Categoria: ", categoria);
-                            if (categoria.equalsIgnoreCase(new Categoria("Vini").toString())) {
+                            if (categoria.equalsIgnoreCase(new Categoria("vini").toString())) {
                                 vini.add(bevanda);
                             }
                         }
@@ -170,7 +170,7 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
                         for (Bevanda bevanda : productList) {
                             String categoria = bevanda.getCategoria().toString();
                             Log.d("Categoria: ", categoria);
-                            if (categoria.equalsIgnoreCase(new Categoria("Analcolici").toString())) {
+                            if (categoria.equalsIgnoreCase(new Categoria("drinkanalcolici").toString())) {
                                 analcolici.add(bevanda);
                             }
                         }
