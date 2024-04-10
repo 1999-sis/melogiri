@@ -21,4 +21,6 @@ public class OrdineAdapter
     RecycleViewInterface recycleViewInterface;
     List<Ordine> ordini;
 
+
+
 }

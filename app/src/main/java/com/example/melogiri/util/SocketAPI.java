@@ -37,6 +37,7 @@ public class SocketAPI {
         List<Bevanda> listaBevande = new ArrayList<>();
         String response = (createChannelSocket("3"));
         JSONArray jsonArray = new JSONArray(response);
+        Log.d(TAG, "Number of elements in JSONArray: " + jsonArray.length());
         for(int i = 0; i < jsonArray.length(); i++)
         {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -128,4 +129,3 @@ public class SocketAPI {
     }
 
 }
-

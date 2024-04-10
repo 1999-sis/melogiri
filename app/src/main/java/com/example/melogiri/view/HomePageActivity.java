@@ -85,6 +85,7 @@ public class HomePageActivity extends AppCompatActivity implements RecycleViewIn
                 case R.id.carrello:
                     // Open CarrelloActivity when "Carrello" is pressed
                     Intent carrelloIntent = new Intent(HomePageActivity.this, CarrelloActivity.class);
+                    carrelloIntent.putExtra("utente", finalUtente);
                     startActivity(carrelloIntent);
                     return true; // Return true to indicate that the item is selected
                 case R.id.home:

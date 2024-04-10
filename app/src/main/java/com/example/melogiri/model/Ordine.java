@@ -6,11 +6,11 @@ import java.util.List;
 public class Ordine
 {
     private String stato;
-    private int totale;
+    private double totale;
     private Date data;
     private Utente utente;
     private List<Bevanda> bevandeAquistate;
-    public Ordine(String stato, int totale, Date data, Utente utente)
+    public Ordine(String stato, double totale, Date data, Utente utente)
     {
         this.stato = stato;
         this.totale = totale;
@@ -18,7 +18,18 @@ public class Ordine
         this.utente = utente;
     }
 
-    public Ordine(String stato, int totale, Date data, Utente utente, List<Bevanda> bevandeAquistate)
+    @Override
+    public String toString() {
+        return "Ordine{" +
+                "stato='" + stato + '\'' +
+                ", totale=" + totale +
+                ", data=" + data +
+                ", utente=" + utente +
+                ", bevandeAquistate=" + bevandeAquistate +
+                '}';
+    }
+
+    public Ordine(String stato, double totale, Date data, Utente utente, List<Bevanda> bevandeAquistate)
     {
         this.stato = stato;
         this.totale = totale;
@@ -45,12 +56,12 @@ public class Ordine
         this.stato = stato;
     }
 
-    public int getTotale()
+    public double getTotale()
     {
         return totale;
     }
 
-    public void setTotale(int totale)
+    public void setTotale(double totale)
     {
         this.totale = totale;
     }

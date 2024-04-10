@@ -18,7 +18,7 @@ public class Carrello {
         bevande.remove(prodotto);
     }
 
-        public boolean contieneProdotto(Bevanda prodotto) {
+    public boolean contieneProdotto(Bevanda prodotto) {
             return bevande.contains(prodotto);
         }
 
