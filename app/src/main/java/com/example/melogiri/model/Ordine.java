@@ -1,6 +1,7 @@
 package com.example.melogiri.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Ordine
 {
@@ -8,13 +9,30 @@ public class Ordine
     private int totale;
     private Date data;
     private Utente utente;
-
+    private List<Bevanda> bevandeAquistate;
     public Ordine(String stato, int totale, Date data, Utente utente)
     {
         this.stato = stato;
         this.totale = totale;
         this.data = data;
         this.utente = utente;
+    }
+
+    public Ordine(String stato, int totale, Date data, Utente utente, List<Bevanda> bevandeAquistate)
+    {
+        this.stato = stato;
+        this.totale = totale;
+        this.data = data;
+        this.utente = utente;
+        this.bevandeAquistate = bevandeAquistate;
+    }
+
+    public List<Bevanda> getBevandeAquistate() {
+        return bevandeAquistate;
+    }
+
+    public void setBevandeAquistate(List<Bevanda> bevandeAquistate) {
+        this.bevandeAquistate = bevandeAquistate;
     }
 
     public String getStato()

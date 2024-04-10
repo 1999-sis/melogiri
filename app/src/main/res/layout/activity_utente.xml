@@ -101,7 +101,7 @@
     <TextView
         android:id="@+id/Email"
         android:layout_width="172dp"
-        android:layout_height="21dp"
+        android:layout_height="wrap_content"
         android:text="value_email"
         android:layout_marginLeft="7dp"
         android:textSize="20sp"
@@ -109,5 +109,26 @@
         app:layout_constraintBottom_toBottomOf="@id/email2"
         app:layout_constraintLeft_toRightOf="@id/email2"
         />
+    <TextView
+        android:id="@+id/mostraOrdini"
+        android:text="Storico Ordini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/email2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/black"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ordiniUtente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/mostraOrdini"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"
+    />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
