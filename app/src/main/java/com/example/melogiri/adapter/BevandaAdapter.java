@@ -85,22 +85,6 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
             }
         });
 
-        holder.buttonIncrement.setOnClickListener(v -> {
-            if(bevanda.getQuantita() > 1) {
-                Log.d("Increment", "Incrementing quantity");
-                bevanda.setQuantita(bevanda.getQuantita() + 1);
-                holder.quantityTextView.setText(String.valueOf(bevanda.getQuantita()));
-            }
-        });
-
-        holder.buttonDecrement.setOnClickListener(v -> {
-            if(bevanda.getQuantita() > 1){
-                Log.d("Increment", "Decrementing quantity");
-                bevanda.setQuantita((bevanda.getQuantita() - 1));
-                holder.quantityTextView.setText(String.valueOf(bevanda.getQuantita()));
-            }
-        });
-
         /*
         holder.removeFromCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,8 +105,6 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView quantityTextView;
-        Button buttonIncrement;
-        Button buttonDecrement;
         TextView categoriaView;
         TextView prezzoTextView;
         RatingBar livelloAlcolicoRatingBar;
@@ -141,8 +123,8 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
             categoriaView=itemView.findViewById(R.id.categoria);
             prezzoTextView=itemView.findViewById(R.id.prezzo);
             livelloAlcolicoRatingBar=itemView.findViewById(R.id.ratingBar);
-            buttonIncrement=itemView.findViewById(R.id.buttonIncrement);
-            buttonDecrement=itemView.findViewById(R.id.buttonDecrement);
+            //buttonIncrement=itemView.findViewById(R.id.buttonIncrement);
+            //buttonDecrement=itemView.findViewById(R.id.buttonDecrement);
             quantityTextView=itemView.findViewById(R.id.quantity);
             //removeFromCartButton = itemView.findViewById(R.id.removeLivello);
 
