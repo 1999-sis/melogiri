@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.melogiri.model.Bevanda;
 import com.example.melogiri.model.Categoria;
+import com.example.melogiri.model.Ordine;
 import com.example.melogiri.model.Utente;
 
 import org.json.JSONArray;
@@ -37,7 +38,7 @@ public class SocketAPI {
         List<Bevanda> listaBevande = new ArrayList<>();
         String response = (createChannelSocket("3"));
         JSONArray jsonArray = new JSONArray(response);
-        Log.d(TAG, "Number of elements in JSONArray: " + jsonArray.length());
+        Log.d("NUMBER_BEVANDE_DATABASE", "Number of elements in JSONArray: " + jsonArray.length());
         for(int i = 0; i < jsonArray.length(); i++)
         {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -87,7 +88,22 @@ public class SocketAPI {
         System.out.println(response);
         return response;
     }
-    public String createChannelSocket(String message) throws IOException {
+    public Ordine creaOrdine(int idUtente, List<Bevanda> carello)
+    {
+        Ordine ordine = null;
+        //Messaggio dal Client
+        //idUtente!{idBevanda, quantità}, .. , {idBevanda,quantità}$tot_prezzo;
+        String message = "4" + idUtente;
+        for (Bevanda bevanda : carello)
+        {
+            message.concat("{" + bevanda.getID() +"," + bevanda.getQuantita() + "}");
+
+        }
+
+       return ordine;
+    }
+    public String createChannelSocket(String message) throws IOException
+    {
         String response = "Error in request";
 
         try

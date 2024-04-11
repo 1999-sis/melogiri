@@ -24,7 +24,7 @@ public class ControllerHomePage
             public void run() {
                 try {
                     // Ottieni le bevande dalla SocketAPI
-                    List<Bevanda> listaBevande = socketAPI.getBevande();
+                    listaBevande = socketAPI.getBevande();
 
                     // Una volta ottenute le bevande, chiama il metodo di callback sull'UI thread
                     activity.runOnUiThread(new Runnable() {

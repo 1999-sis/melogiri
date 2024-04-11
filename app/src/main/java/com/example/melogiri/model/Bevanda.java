@@ -21,17 +21,6 @@ public class Bevanda implements Parcelable {
         this.quantita = quantita;
     }
 
-    public Bevanda(String nome, String urlPhoto, int livelloAlcolico, String descrizione,
-                   Categoria categoria, int prezzo, int quantita) {
-        this.nome = nome;
-        this.urlPhoto = urlPhoto;
-        this.livelloAlcolico = livelloAlcolico;
-        this.descrizione = descrizione;
-        this.categoria = categoria;
-        this.prezzo = prezzo;
-        this.quantita = quantita;
-    }
-
     // Costruttore per le prove
     public Bevanda(int idBevanda,String nome,  String urlPhoto, int livelloAlcolico, String descrizione, Categoria categoria, int prezzo)
     {
@@ -133,10 +122,19 @@ public class Bevanda implements Parcelable {
     @Override
     public String toString() {
         return "Bevanda{" +
-                "nome='" + nome + '\'' +
+                "idBevanda=" + idBevanda +
+                ", nome='" + nome + '\'' +
                 ", urlPhoto='" + urlPhoto + '\'' +
+                ", livelloAlcolico=" + livelloAlcolico +
+                ", quantita=" + quantita +
                 ", descrizione='" + descrizione + '\'' +
                 ", categoria=" + categoria +
+                ", prezzo=" + prezzo +
                 '}';
+    }
+
+    public int getID()
+    {
+        return idBevanda;
     }
 }
