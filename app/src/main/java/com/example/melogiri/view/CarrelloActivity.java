@@ -47,17 +47,17 @@ public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapt
         buttonAcquista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(controllerCarrello.getProdotti()!=null){
-                    Date today=new Date();
-                    double prezzoTot=controllerCarrello.getPrezzoTotale();
-                    Ordine ordine=new Ordine("stato", prezzoTot, today, utente);
+                if(controllerCarrello.getProdotti() != null && !controllerCarrello.getProdotti().isEmpty()){
+                    Date today = new Date();
+                    double prezzoTot = controllerCarrello.getPrezzoTotale();
+                    Ordine ordine = new Ordine("stato", prezzoTot, today, utente);
                     Log.d("ordine", ordine.toString());
-                }
-                else{
+                } else {
                     Toast.makeText(CarrelloActivity.this, "Il carrello è vuoto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.melogiri.R;
+import com.example.melogiri.controller.ControllerCarrello;
 import com.example.melogiri.model.Bevanda;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
 
     private List<Bevanda> prodottiCarrello;
     private OnCarrelloChangeListener listener;
+    private ControllerCarrello controllerCarrello = ControllerCarrello.getInstance();
 
     public CarrelloAdapter(List<Bevanda> prodottiCarrello, OnCarrelloChangeListener listener) {
         this.prodottiCarrello = new ArrayList<>(prodottiCarrello);
@@ -48,7 +50,7 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
         holder.productNameTextView.setText(prodotto.getNome());
         holder.productDescriptionTextView.setText(prodotto.getDescrizione());
         holder.livelloAlcolicoRatingBar.setRating((float) prodotto.getLivelloAlcolico());
-        holder.prezzoTextView.setText(String.format(Locale.ITALY, "%.2f euro", (double)prodotto.getPrezzo()));
+        holder.prezzoTextView.setText(String.format(Locale.ITALY, "%.2f euro", (double) prodotto.getPrezzo()));
         holder.categoriaView.setText(prodotto.getCategoria().getCategoria());
         holder.quantityTextView.setText(String.valueOf(prodotto.getQuantita()));
 
@@ -77,11 +79,12 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
         });
 
         holder.removeFromCartButton.setOnClickListener(v -> {
-            prodottiCarrello.remove(position);
+            Bevanda removedProduct = prodottiCarrello.remove(position);
+            controllerCarrello.rimuoviProdotto(removedProduct);  // Update the controller
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, prodottiCarrello.size());
-            listener.onProdottoRimosso(prodotto);
-            listener.onPrezzoTotaleChanged(calcolaPrezzoTotale());
+            listener.onProdottoRimosso(removedProduct);  // Notify the listener
+            listener.onPrezzoTotaleChanged(calcolaPrezzoTotale());  // Update total price
         });
     }
 

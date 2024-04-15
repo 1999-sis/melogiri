@@ -1,9 +1,7 @@
 package com.example.melogiri.controller;
 
 import android.widget.Toast;
-
 import com.example.melogiri.model.Bevanda;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +20,7 @@ public class ControllerCarrello {
         return instance;
     }
 
-    public void aggiungiProdotto(Bevanda bevanda)
-    {
+    public void aggiungiProdotto(Bevanda bevanda) {
         productList.add(bevanda);
     }
 
@@ -32,14 +29,13 @@ public class ControllerCarrello {
     }
 
     public List<Bevanda> getProdotti() {
-        return productList;
+        return new ArrayList<>(productList);  // Return a copy to prevent external modification
     }
 
     public double getPrezzoTotale() {
         double prezzoTotale = 0.0;
-
         for (Bevanda prodotto : productList) {
-            prezzoTotale += prodotto.getPrezzo(); // Assumendo che Bevanda abbia un metodo getPrezzo() che restituisce il prezzo come double
+            prezzoTotale += prodotto.getPrezzo() * prodotto.getQuantita();
         }
         return prezzoTotale;
     }
