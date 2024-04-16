@@ -39,7 +39,7 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_bevanda_carrello, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_bevanda_carello2, parent, false);
         return new ViewHolder(view);
     }
 
@@ -48,10 +48,7 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Bevanda prodotto = prodottiCarrello.get(position);
         holder.productNameTextView.setText(prodotto.getNome());
-        holder.productDescriptionTextView.setText(prodotto.getDescrizione());
-        holder.livelloAlcolicoRatingBar.setRating((float) prodotto.getLivelloAlcolico());
         holder.prezzoTextView.setText(String.format(Locale.ITALY, "%.2f euro", (double) prodotto.getPrezzo()));
-        holder.categoriaView.setText(prodotto.getCategoria().getCategoria());
         holder.quantityTextView.setText(String.valueOf(prodotto.getQuantita()));
 
         Picasso.get()
@@ -90,7 +87,8 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
 
     private double calcolaPrezzoTotale() {
         double totale = 0;
-        for (Bevanda prodotto : prodottiCarrello) {
+        for (Bevanda prodotto : prodottiCarrello)
+        {
             totale += prodotto.getPrezzo() * prodotto.getQuantita();
         }
         return totale;
@@ -102,19 +100,15 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView productNameTextView, productDescriptionTextView, categoriaView, prezzoTextView, quantityTextView;
-        RatingBar livelloAlcolicoRatingBar;
+        TextView productNameTextView, prezzoTextView, quantityTextView;
         ImageView productImage;
         Button buttonIncrement, buttonDecrement, removeFromCartButton;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             productNameTextView = itemView.findViewById(R.id.nomeBevanda);
-            productDescriptionTextView = itemView.findViewById(R.id.descrizione);
-            categoriaView = itemView.findViewById(R.id.categoria);
             prezzoTextView = itemView.findViewById(R.id.prezzo);
             quantityTextView = itemView.findViewById(R.id.quantity);
-            livelloAlcolicoRatingBar = itemView.findViewById(R.id.ratingBar);
             productImage = itemView.findViewById(R.id.imageView2);
             buttonIncrement = itemView.findViewById(R.id.buttonIncrement);
             buttonDecrement = itemView.findViewById(R.id.buttonDecrement);
