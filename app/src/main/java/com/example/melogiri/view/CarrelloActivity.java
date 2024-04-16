@@ -21,10 +21,7 @@ import java.util.Date;
 public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapter.OnCarrelloChangeListener {
 
     private TextView prezzoTotaleTextView;
-
-    private ControllerCarrello controllerCarrello=new ControllerCarrello();
-
-
+    private ControllerCarrello controllerCarrello;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +29,11 @@ public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapt
         setContentView(R.layout.carrello_activity);
 
         Intent intent = getIntent();
-
         Utente utente = (Utente) intent.getSerializableExtra("utente");
-
         prezzoTotaleTextView = findViewById(R.id.prezzoTotale);
+
+        // Usa l'istanza singleton del ControllerCarrello
+        controllerCarrello = ControllerCarrello.getInstance();
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -47,17 +45,18 @@ public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapt
         buttonAcquista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(controllerCarrello.getProdotti() != null && !controllerCarrello.getProdotti().isEmpty()){
+                // Controlla direttamente la lista del singleton
+                if (!controllerCarrello.getProdotti().isEmpty()) {
                     Date today = new Date();
                     double prezzoTot = controllerCarrello.getPrezzoTotale();
                     Ordine ordine = new Ordine("stato", prezzoTot, today, utente);
-                    Log.d("ordine", ordine.toString());
+                    Log.d("CarrelloDebug", "Ordine: " + ordine.toString());
+                    // Qui dovresti implementare la logica per finalizzare l'ordine
                 } else {
                     Toast.makeText(CarrelloActivity.this, "Il carrello è vuoto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
 
     @Override
@@ -69,7 +68,7 @@ public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapt
     public void onProdottoRimosso(Bevanda prodotto) {
         runOnUiThread(() -> {
             Toast.makeText(this, prodotto.getNome() + " rimosso dal carrello", Toast.LENGTH_SHORT).show();
-            // Potenzialmente aggiorna la UI qui se necessario
+            // Qui potrebbe essere necessario aggiornare l'adapter del RecyclerView
         });
     }
 }
