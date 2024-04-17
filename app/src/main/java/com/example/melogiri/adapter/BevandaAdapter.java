@@ -1,7 +1,6 @@
 package com.example.melogiri.adapter;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +8,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.melogiri.R;
 import com.example.melogiri.controller.ControllerCarrello;
 import com.example.melogiri.model.Bevanda;
 import com.example.melogiri.recycleView.RecycleViewInterface;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
 import java.util.List;
 import java.util.Locale;
 
@@ -30,7 +24,7 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
     private RecycleViewInterface recycleViewInterface;
     private List<Bevanda> productList;
     private ControllerCarrello controllerCarrello;
-    private boolean isCartView; // Flag to indicate if the adapter is being used in cart view
+    private boolean isCartView;
 
     public BevandaAdapter(List<Bevanda> productList, ControllerCarrello controllerCarrello, RecycleViewInterface recycleViewInterface, boolean isCartView) {
         this.productList = productList;
@@ -53,22 +47,40 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Bevanda bevanda = productList.get(position);
         holder.productNameTextView.setText(bevanda.getNome());
         holder.productDescriptionTextView.setText(bevanda.getDescrizione());
         holder.livelloAlcolicoRatingBar.setRating((float) bevanda.getLivelloAlcolico());
-        holder.prezzoTextView.setText(String.valueOf(bevanda.getPrezzo()) + " euro");
-        holder.categoriaView.setText((bevanda.getCategoria().getCategoria()));
+        holder.prezzoTextView.setText(String.format(Locale.getDefault(), "%.2f euro", (double) bevanda.getPrezzo()));
+        holder.categoriaView.setText(bevanda.getCategoria().getCategoria());
+
+        String category = bevanda.getCategoria().getCategoria().toLowerCase();
+        int imageResId;
+        switch (category) {
+            case "vini":
+                imageResId = R.drawable.wine;
+                break;
+            case "alcolici":
+                imageResId = R.drawable.drinkalcolici;
+                break;
+            case "analcolici":
+                imageResId = R.drawable.drinkanalcolici;
+                break;
+            case "softdrink":
+                imageResId = R.drawable.softdrink;
+                break;
+            default:
+                imageResId = R.drawable.carddrink; // Un'immagine predefinita se la categoria non è riconosciuta
+                break;
+        }
 
         Picasso.get()
-                .load(R.drawable.carddrink)
-                .resize(600,600)
+                .load(imageResId)
+                .resize(600, 600)
                 .centerCrop()
                 .into(holder.productImage);
 
-        // Set visibility of buttons based on view type
         if (isCartView) {
             holder.addToCartButton.setVisibility(View.GONE);
             holder.removeFromCartButton.setVisibility(View.VISIBLE);
@@ -82,19 +94,21 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
             public void onClick(View v) {
                 controllerCarrello.aggiungiProdotto(bevanda);
                 notifyDataSetChanged();
+                Toast.makeText(v.getContext(), bevanda.getNome() + " aggiunto al carrello", Toast.LENGTH_SHORT).show();
             }
         });
 
-        /*
-        holder.removeFromCartButton.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                controllerCarrello.rimuoviProdotto(bevanda);
-                notifyDataSetChanged();
+            public void onClick(View view) {
+                if (recycleViewInterface != null) {
+                    int pos = holder.getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        recycleViewInterface.onClickItem(pos);
+                    }
+                }
             }
         });
-
-         */
     }
 
     @Override
@@ -103,8 +117,6 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView quantityTextView;
         TextView categoriaView;
         TextView prezzoTextView;
         RatingBar livelloAlcolicoRatingBar;
@@ -120,25 +132,10 @@ public class BevandaAdapter extends RecyclerView.Adapter<BevandaAdapter.ViewHold
             productDescriptionTextView = itemView.findViewById(R.id.descrizione);
             productImage = itemView.findViewById(R.id.imageView2);
             addToCartButton = itemView.findViewById(R.id.buttonAggiungiAlCarrello);
-            categoriaView=itemView.findViewById(R.id.categoria);
-            prezzoTextView=itemView.findViewById(R.id.prezzo);
-            livelloAlcolicoRatingBar=itemView.findViewById(R.id.ratingBar);
-            //buttonIncrement=itemView.findViewById(R.id.buttonIncrement);
-            //buttonDecrement=itemView.findViewById(R.id.buttonDecrement);
-            quantityTextView=itemView.findViewById(R.id.quantity);
-            //removeFromCartButton = itemView.findViewById(R.id.removeLivello);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (recycleViewInterface != null) {
-                        int pos = getAdapterPosition();
-                        if (pos != RecyclerView.NO_POSITION) {
-                            recycleViewInterface.onClickItem(pos);
-                        }
-                    }
-                }
-            });
+            categoriaView = itemView.findViewById(R.id.categoria);
+            prezzoTextView = itemView.findViewById(R.id.prezzo);
+            livelloAlcolicoRatingBar = itemView.findViewById(R.id.ratingBar);
+            removeFromCartButton = itemView.findViewById(R.id.buttonRimuoviDalCarrello);
         }
     }
 }

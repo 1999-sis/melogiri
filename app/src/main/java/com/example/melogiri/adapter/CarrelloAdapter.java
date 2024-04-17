@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,11 +47,13 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Bevanda prodotto = prodottiCarrello.get(position);
         holder.productNameTextView.setText(prodotto.getNome());
-        holder.prezzoTextView.setText(String.format(Locale.ITALY, "%.2f euro", (double) prodotto.getPrezzo()));
-        holder.quantityTextView.setText(String.valueOf(prodotto.getQuantita()));
+        holder.prezzoTextView.setText(format(Locale.ITALY, "%.2f euro", (double) prodotto.getPrezzo()));
+        holder.quantityTextView.setText(format(Locale.ITALY, "%d", prodotto.getQuantita()));
 
+        // Carica l'immagine in base alla categoria
+        int imageResId = getImageResourceId(prodotto.getCategoria().getCategoria());
         Picasso.get()
-                .load(R.drawable.carddrink)
+                .load(imageResId)
                 .resize(600, 600)
                 .centerCrop()
                 .into(holder.productImage);
@@ -60,7 +61,7 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
         holder.buttonIncrement.setOnClickListener(v -> {
             int quantita = prodotto.getQuantita() + 1;
             prodotto.setQuantita(quantita);
-            holder.quantityTextView.setText(String.valueOf(quantita));
+            holder.quantityTextView.setText(format(Locale.ITALY, "%d", quantita));
             notifyItemChanged(position);
             listener.onPrezzoTotaleChanged(calcolaPrezzoTotale());
         });
@@ -69,7 +70,7 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
             int quantita = prodotto.getQuantita() - 1;
             if (quantita > 0) {
                 prodotto.setQuantita(quantita);
-                holder.quantityTextView.setText(String.valueOf(quantita));
+                holder.quantityTextView.setText(format(Locale.ITALY, "%d", quantita));
                 notifyItemChanged(position);
                 listener.onPrezzoTotaleChanged(calcolaPrezzoTotale());
             }
@@ -77,21 +78,36 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
 
         holder.removeFromCartButton.setOnClickListener(v -> {
             Bevanda removedProduct = prodottiCarrello.remove(position);
-            controllerCarrello.rimuoviProdotto(removedProduct);  // Update the controller
+            controllerCarrello.rimuoviProdotto(removedProduct);
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, prodottiCarrello.size());
-            listener.onProdottoRimosso(removedProduct);  // Notify the listener
-            listener.onPrezzoTotaleChanged(calcolaPrezzoTotale());  // Update total price
+            listener.onProdottoRimosso(removedProduct);
+            listener.onPrezzoTotaleChanged(calcolaPrezzoTotale());
         });
     }
 
     private double calcolaPrezzoTotale() {
         double totale = 0;
-        for (Bevanda prodotto : prodottiCarrello)
-        {
+        for (Bevanda prodotto : prodottiCarrello) {
             totale += prodotto.getPrezzo() * prodotto.getQuantita();
         }
         return totale;
+    }
+
+    private int getImageResourceId(String category) {
+        category = category.toLowerCase(Locale.ITALY); // Usare il locale italiano se i nomi delle categorie sono in italiano
+        switch (category) {
+            case "vini":
+                return R.drawable.wine;
+            case "alcolici":
+                return R.drawable.drinkalcolici;
+            case "analcolici":
+                return R.drawable.drinkanalcolici;
+            case "softdrink":
+                return R.drawable.softdrink;
+            default:
+                return R.drawable.carddrink; // Un'immagine predefinita se la categoria non è riconosciuta
+        }
     }
 
     @Override
