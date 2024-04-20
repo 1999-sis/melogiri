@@ -16,12 +16,11 @@ import com.example.melogiri.model.Bevanda;
 import com.example.melogiri.model.Ordine;
 import com.example.melogiri.model.Utente;
 
-import java.util.Date;
-
 public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapter.OnCarrelloChangeListener {
 
     private TextView prezzoTotaleTextView;
     private ControllerCarrello controllerCarrello;
+    private Utente utente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,32 +28,38 @@ public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapt
         setContentView(R.layout.carrello_activity);
 
         Intent intent = getIntent();
-        Utente utente = (Utente) intent.getSerializableExtra("utente");
+        utente = (Utente) intent.getSerializableExtra("utente");
         prezzoTotaleTextView = findViewById(R.id.prezzoTotale);
 
-        // Usa l'istanza singleton del ControllerCarrello
         controllerCarrello = ControllerCarrello.getInstance();
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, new CarrelloFragment())
-                    .commit();
+                    .commitNowAllowingStateLoss();
         }
 
         Button buttonAcquista = findViewById(R.id.button3);
         buttonAcquista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Controlla direttamente la lista del singleton
-                if (!controllerCarrello.getProdotti().isEmpty()) {
-                    Date today = new Date();
-                    double prezzoTot = controllerCarrello.getPrezzoTotale();
-                    Ordine ordine = new Ordine("stato", prezzoTot, today, utente);
-                    Log.d("CarrelloDebug", "Ordine: " + ordine.toString());
-                    // Qui dovresti implementare la logica per finalizzare l'ordine
-                } else {
-                    Toast.makeText(CarrelloActivity.this, "Il carrello è vuoto", Toast.LENGTH_SHORT).show();
-                }
+                controllerCarrello.finalizzaAcquisto(utente, CarrelloActivity.this, new ControllerCarrello.AcquistoCallback() {
+                    @Override
+                    public void onSuccess(Ordine ordine) {
+                        Log.d("CarrelloDebug", "Ordine: " + ordine.toString());
+                        // Implementa la logica per finalizzare l'ordine qui
+                    }
+
+                    @Override
+                    public void onQuantitaZero() {
+                        // Gestito nel ControllerCarrello
+                    }
+
+                    @Override
+                    public void onCarrelloVuoto() {
+                        // Gestito nel ControllerCarrello
+                    }
+                });
             }
         });
     }
@@ -67,8 +72,10 @@ public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapt
     @Override
     public void onProdottoRimosso(Bevanda prodotto) {
         runOnUiThread(() -> {
-            Toast.makeText(this, prodotto.getNome() + " rimosso dal carrello", Toast.LENGTH_SHORT).show();
-            // Qui potrebbe essere necessario aggiornare l'adapter del RecyclerView
+            Toast.makeText(CarrelloActivity.this, prodotto.getNome() + " rimosso dal carrello", Toast.LENGTH_SHORT).show();
+            // Aggiornamento dell'interfaccia utente e delle strutture dati, se necessario
         });
     }
+
+    // Aggiungi qui altri metodi e implementazioni necessari
 }
