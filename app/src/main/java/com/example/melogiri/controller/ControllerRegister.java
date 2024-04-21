@@ -1,12 +1,11 @@
 package com.example.melogiri.controller;
 
 import android.content.Intent;
-
-import androidx.biometric.BiometricManager;
-import androidx.biometric.BiometricPrompt;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
 import com.example.melogiri.util.SocketAPI;
@@ -18,39 +17,39 @@ import java.util.concurrent.Executors;
 public class ControllerRegister {
     SocketAPI socket = new SocketAPI("209.38.244.243", 8080);
 
-    public void register(RegisterActivity registerActivity, String nome, String cognome, String data, String email, String password)
-    {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String response = socket.register(nome, cognome, data, email, password);
-                    Log.d("REGISTER_UTENTE", response);
-                    if (response.equalsIgnoreCase("Registration_Successful")) {
-                        registerActivity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Show a Toast to indicate successful registration
-                                Toast.makeText(registerActivity, "Registrazione avvenuta con successo", Toast.LENGTH_SHORT).show();
+    public void register(RegisterActivity registerActivity, String nome, String cognome, String data, String email, String password) {
+        // Verifica che tutti i campi siano compilati
+        if (nome.isEmpty() || cognome.isEmpty() || data.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            registerActivity.runOnUiThread(() ->
+                    Toast.makeText(registerActivity, "Per favore, completa tutti i campi per la registrazione.", Toast.LENGTH_SHORT).show()
+            );
+            return;
+        }
 
-                                // Start an Intent to return to the previous Activity
-                                Intent intent = new Intent(registerActivity, LoginActivity.class);
-                                registerActivity.startActivity(intent);
-
-                                // Close the current Activity
-                                registerActivity.finish();
-                            }
-                        });
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+        new Thread(() -> {
+            try {
+                String response = socket.register(nome, cognome, data, email, password);
+                Log.d("REGISTER_UTENTE", response);
+                if (response.equalsIgnoreCase("Registration_Successful")) {
+                    registerActivity.runOnUiThread(() -> {
+                        Toast.makeText(registerActivity, "Registrazione avvenuta con successo", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(registerActivity, LoginActivity.class);
+                        registerActivity.startActivity(intent);
+                        registerActivity.finish();
+                    });
+                } else {
+                    registerActivity.runOnUiThread(() ->
+                            Toast.makeText(registerActivity, "Errore di registrazione: " + response, Toast.LENGTH_SHORT).show()
+                    );
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+                registerActivity.runOnUiThread(() ->
+                        Toast.makeText(registerActivity, "Errore di connessione al server", Toast.LENGTH_SHORT).show()
+                );
             }
-        });
-        thread.start();
-    }
-    public void showBiometricPrompt(LoginActivity loginActivity)
+        }).start();
+    }    public void showBiometricPrompt(LoginActivity loginActivity)
     {
         BiometricManager biometricManager = BiometricManager.from(loginActivity);
         switch (biometricManager.canAuthenticate()) {
