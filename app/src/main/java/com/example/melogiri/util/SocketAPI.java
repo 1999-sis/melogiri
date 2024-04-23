@@ -19,6 +19,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -88,34 +89,63 @@ public class SocketAPI {
         System.out.println(response);
         return response;
     }
-    public Ordine creaOrdine(int idUtente, List<Bevanda> carello)
-    {
-        Ordine ordine = null;
-        //Messaggio dal Client
-        //idUtente!{idBevanda, quantità}, .. , {idBevanda,quantità}$tot_prezzo;
-        String message = "4" + idUtente;
-        for (Bevanda bevanda : carello)
-        {
-            message.concat("{" + bevanda.getID() +"," + bevanda.getQuantita() + "}");
 
+    public Ordine creaOrdine(Utente utente, List<Bevanda> carrello) {
+        // Imposta l'ID utente statico per il test
+        int idUtenteTest = 1;
+
+        if (carrello == null || carrello.isEmpty()) {
+            Log.e(TAG, "Il carrello è vuoto.");
+            return null;
         }
 
-       return ordine;
-    }
-    public String createChannelSocket(String message) throws IOException
-    {
-        String response = "Error in request";
+        StringBuilder sb = new StringBuilder();
+        sb.append("4"); // Prefisso per l'azione di creazione dell'ordine
+        sb.append(idUtenteTest); // Utilizza l'ID utente statico
 
-        try
-        {
-            Log.d(TAG, "Connecting to server: " + serverAddress + ":" + port);
+        double totale = 0.0;
+        for (Bevanda bevanda : carrello) {
+            sb.append("{").append(bevanda.getID()).append(",").append(bevanda.getQuantita()).append("},");
+            totale += bevanda.getPrezzo() * bevanda.getQuantita();
+        }
+
+        // Rimuove l'ultima virgola se ci sono bevande nel carrello
+        if (!carrello.isEmpty()) {
+            sb.setLength(sb.length() - 1);
+        }
+
+        // Aggiunge il prezzo totale al messaggio
+        sb.append("$").append(totale);
+
+        String messaggioCompleto = sb.toString();
+        Log.d(TAG, "Messaggio completo inviato al server: " + messaggioCompleto);
+
+        // Qui avviene la comunicazione con il server utilizzando il socket
+        String response = createChannelSocket(messaggioCompleto);
+        if (response != null && response.equals("Ordine_OKKE")) {
+            Log.d(TAG, "Risposta del server ricevuta: " + response);
+            // Assumi che l'ordine sia stato creato con successo e restituisci un nuovo oggetto Ordine
+            return new Ordine("confermato", totale, new Date(), utente, carrello);
+        } else {
+            // Log dell'errore o della risposta inattesa
+            Log.e(TAG, "Errore nella creazione dell'ordine o risposta inattesa: " + response);
+            return null;
+        }
+    }
+
+
+
+    public String createChannelSocket(String message) {
+        String response = "Errore nella richiesta";
+        try {
+            Log.d(TAG, "Tentativo di connessione al server: " + serverAddress + ":" + port);
             socket = new Socket(serverAddress, port);
 
             OutputStream output = socket.getOutputStream();
             PrintWriter writer = new PrintWriter(output, true);
 
             InputStream inputStream = socket.getInputStream();
-
+            Log.d(TAG, "Invio messaggio al server: " + message);
             writer.println(message);
 
             byte[] buffer = new byte[100000];
@@ -123,24 +153,23 @@ public class SocketAPI {
 
             if (bytesRead > 0) {
                 response = new String(buffer, 0, bytesRead);
+                Log.d(TAG, "Risposta ricevuta dal server: " + response);
             } else {
-                Log.e(TAG, "The server did not send valid data.");
+                Log.e(TAG, "Il server non ha inviato dati validi.");
             }
-
         } catch (UnknownHostException ex) {
-            Log.e(TAG, "Invalid server IP address: " + serverAddress);
-            ex.printStackTrace();
+            Log.e(TAG, "Indirizzo server non valido: " + serverAddress, ex);
         } catch (IOException ex) {
-            Log.e(TAG, "I/O error while connecting to the server: " + serverAddress);
-            ex.printStackTrace();
-        }
-        finally
-        {
-            if(socket != null) {
-                socket.close();
+            Log.e(TAG, "Errore I/O durante la connessione al server: " + serverAddress, ex);
+        } finally {
+            if (socket != null && !socket.isClosed()) {
+                try {
+                    socket.close();
+                } catch (IOException ex) {
+                    Log.e(TAG, "Errore nella chiusura del socket", ex);
+                }
             }
         }
-
         return response;
     }
 

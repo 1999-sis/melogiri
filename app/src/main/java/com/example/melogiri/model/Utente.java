@@ -1,11 +1,11 @@
 package com.example.melogiri.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 public class Utente implements Serializable
 {
+    private int idutente;
     private String nome;
     private String cognome;
     private String data;
@@ -29,8 +29,15 @@ public class Utente implements Serializable
                 '}';
     }
 
-    public Utente(String idutente, String nome, String cognome, String data_di_nascita, String email, String password) {
+    public Utente(int idutente, String nome, String cognome, String data, String email, String password) {
+        this.idutente = idutente;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.data = data;
+        this.email = email;
+        this.password = password;
     }
+
 
 
     public String getNome()
@@ -81,4 +88,6 @@ public class Utente implements Serializable
     {
         this.ordini = ordini;
     }
+    public int getId() { return idutente; }
+    public void setId(int idutente) { this.idutente=idutente; }
 }
