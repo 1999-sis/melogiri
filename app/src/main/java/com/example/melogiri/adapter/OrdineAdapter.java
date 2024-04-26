@@ -9,7 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.melogiri.R;
-import com.example.melogiri.model.Ordine;
+import com.example.melogiri.controller.ControllerProfilo;
+import com.example.melogiri.controller.StoricoOrdineCallBack;
+import com.example.melogiri.model.StoricoOrdine;
+import com.example.melogiri.recycleView.RecycleViewInterface;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -17,12 +20,20 @@ import java.util.Locale;
 
 public class OrdineAdapter extends RecyclerView.Adapter<OrdineAdapter.OrdineViewHolder> {
 
-    private List<Ordine> ordini;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    private List<StoricoOrdine> ordini;
+    private String date;
+    private RecycleViewInterface recycleViewInterface;
+    private ControllerProfilo controllerProfilo;
+    private boolean isCartView;
 
-    public OrdineAdapter(List<Ordine> ordini) {
+    public OrdineAdapter(List<StoricoOrdine> ordini, RecycleViewInterface recycleViewInterface, ControllerProfilo controllerProfilo, boolean isCartView)
+    {
         this.ordini = ordini;
+        this. recycleViewInterface = recycleViewInterface;
+        this.controllerProfilo = controllerProfilo;
+        this.isCartView = isCartView;
     }
+
 
     @NonNull
     @Override
@@ -33,16 +44,18 @@ public class OrdineAdapter extends RecyclerView.Adapter<OrdineAdapter.OrdineView
 
     @Override
     public void onBindViewHolder(@NonNull OrdineViewHolder holder, int position) {
-        Ordine ordine = ordini.get(position);
-        //mettere holder della bevanda
-        holder.tvDataOrdine.setText(dateFormat.format(ordine.getData()));
-        holder.tvQuantitaBevande.setText(String.format(Locale.getDefault(), "%d bevande", ordine.getBevandeAquistate().size()));
-        holder.tvPrezzoTotale.setText(String.format(Locale.getDefault(), "€%.2f", ordine.getTotale()));
+        StoricoOrdine ordine = ordini.get(position);
+
+        holder.tvBevanda.setText(ordine.getNome());
+        holder.tvDataOrdine.setText(ordine.getDate());
+        holder.tvQuantitaBevande.setText(String.valueOf(ordine.getQuantita()));
+        holder.tvPrezzoTotale.setText(String.valueOf(ordine.getTotalePrezzo()));
     }
 
     @Override
-    public int getItemCount() {
-        return ordini != null ? ordini.size() : 0;
+    public int getItemCount()
+    {
+        return ordini.size();
     }
 
     static class OrdineViewHolder extends RecyclerView.ViewHolder {
@@ -51,7 +64,8 @@ public class OrdineAdapter extends RecyclerView.Adapter<OrdineAdapter.OrdineView
         TextView tvPrezzoTotale;
         TextView tvBevanda;
 
-        OrdineViewHolder(View itemView) {
+        OrdineViewHolder(View itemView)
+        {
             super(itemView);
             tvBevanda = itemView.findViewById(R.id.valueBevanda);
             tvDataOrdine = itemView.findViewById(R.id.valueData);

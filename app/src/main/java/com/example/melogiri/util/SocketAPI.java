@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.melogiri.model.Bevanda;
 import com.example.melogiri.model.Categoria;
 import com.example.melogiri.model.Ordine;
+import com.example.melogiri.model.StoricoOrdine;
 import com.example.melogiri.model.Utente;
 
 import org.json.JSONArray;
@@ -132,7 +133,30 @@ public class SocketAPI {
             return null;
         }
     }
+    public List<StoricoOrdine> getOrdini(int userID) throws IOException, JSONException
+    {
+        List<StoricoOrdine> listaOrdine = new ArrayList<>();
+        String message = "5" + userID;
+        String response = (createChannelSocket(message));
 
+        Log.d("ORDINE_CON_ID", String.valueOf(userID));
+
+        JSONArray jsonArray = new JSONArray(response);
+        Log.d("NUMBER_ORDINI", "Number of elements in JSONArray: " + jsonArray.length());
+
+        for(int i = 0; i < jsonArray.length(); i++)
+        {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
+            // Estrai i campi dall'oggetto JSON
+            String nome = jsonObject.getString("nome_bevanda");
+            int quantita = jsonObject.getInt("quantita");
+            String data = jsonObject.getString("data_ordine");
+            int prezzo = jsonObject.getInt("prezzo_totale");
+            listaOrdine.add(new StoricoOrdine(nome, data, quantita, prezzo));
+        }
+
+        return listaOrdine;
+    }
 
 
     public String createChannelSocket(String message) {

@@ -44,7 +44,8 @@ public class CarrelloAdapter extends RecyclerView.Adapter<CarrelloAdapter.ViewHo
 
     @SuppressLint("DefaultLocale")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
+    {
         Bevanda prodotto = prodottiCarrello.get(position);
         holder.productNameTextView.setText(prodotto.getNome());
         holder.prezzoTextView.setText(format(Locale.ITALY, "%.2f euro", (double) prodotto.getPrezzo()));
