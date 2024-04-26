@@ -15,6 +15,7 @@ import com.example.melogiri.fragment.CarrelloFragment;
 import com.example.melogiri.model.Bevanda;
 import com.example.melogiri.model.Ordine;
 import com.example.melogiri.model.Utente;
+import com.example.melogiri.util.OrdineCallback;
 
 public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapter.OnCarrelloChangeListener {
 
@@ -40,28 +41,22 @@ public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapt
         }
 
         Button buttonAcquista = findViewById(R.id.button3);
-        buttonAcquista.setOnClickListener(new View.OnClickListener() {
+        buttonAcquista.setOnClickListener( (view) ->
+        {controllerCarrello.finalizzaAcquisto( utente,  this, this, new OrdineCallback()
+        {
             @Override
-            public void onClick(View v) {
-                controllerCarrello.finalizzaAcquisto(utente, CarrelloActivity.this, new ControllerCarrello.AcquistoCallback() {
-                    @Override
-                    public void onSuccess(Ordine ordine) {
-                        Log.d("CarrelloDebug", "Ordine: " + ordine.toString());
-                        // Implementa la logica per finalizzare l'ordine qui
-                    }
+            public void onSuccess(Ordine ordine)
+            {
+                Log.d("PODODF","3ejd");
+            }
 
-                    @Override
-                    public void onQuantitaZero() {
-                        // Gestito nel ControllerCarrello
-                    }
+            @Override
+            public void onFailure(String errore) {
 
-                    @Override
-                    public void onCarrelloVuoto() {
-                        // Gestito nel ControllerCarrello
-                    }
-                });
             }
         });
+        }
+        );
     }
 
     @Override

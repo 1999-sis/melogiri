@@ -90,7 +90,8 @@ public class SocketAPI {
         return response;
     }
 
-    public Ordine creaOrdine(Utente utente, List<Bevanda> carrello) {
+    public Ordine creaOrdine(Utente utente, List<Bevanda> carrello, OrdineCallback ordineCallback)
+    {
         // Imposta l'ID utente statico per il test
         int idUtenteTest = 1;
 
@@ -102,7 +103,7 @@ public class SocketAPI {
         StringBuilder sb = new StringBuilder();
         sb.append("4"); // Prefisso per l'azione di creazione dell'ordine
         sb.append(idUtenteTest); // Utilizza l'ID utente statico
-
+        sb.append("!");
         double totale = 0.0;
         for (Bevanda bevanda : carrello) {
             sb.append("{").append(bevanda.getID()).append(",").append(bevanda.getQuantita()).append("},");

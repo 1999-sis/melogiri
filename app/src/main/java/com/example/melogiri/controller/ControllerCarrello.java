@@ -9,10 +9,10 @@ import android.widget.Toast;
 import com.example.melogiri.model.Bevanda;
 import com.example.melogiri.model.Ordine;
 import com.example.melogiri.model.Utente;
+import com.example.melogiri.util.OrdineCallback;
 import com.example.melogiri.util.SocketAPI;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ControllerCarrello {
@@ -21,15 +21,16 @@ public class ControllerCarrello {
     private static ControllerCarrello instance;
     private List<Bevanda> productList;
 
-    public interface AcquistoCallback {
+    public interface AcquistoCallback
+    {
         void onSuccess(Ordine ordine);
+
         void onQuantitaZero();
         void onCarrelloVuoto();
     }
 
     private ControllerCarrello() {
         productList = new ArrayList<>();
-
         socketAPI = new SocketAPI("209.38.244.243", 8080);
 
     }
@@ -61,42 +62,59 @@ public class ControllerCarrello {
         return prezzoTotale;
     }
 
-    public void finalizzaAcquisto(Utente utente, Context context, AcquistoCallback callback) {
-        new Thread(() -> {
-            Log.d(TAG, "Inizio del processo di finalizzazione dell'acquisto");
-            boolean quantitaValida = verificaQuantita(productList);
-            if (!quantitaValida) {
-                Log.d(TAG, "Quantità non valida rilevata nei prodotti");
-                runOnUiThread(context, () -> {
-                    Toast.makeText(context, "La quantità dei prodotti non può essere 0", Toast.LENGTH_SHORT).show();
-                    callback.onQuantitaZero();
-                });
-                return;
-            }
+    public void finalizzaAcquisto(Utente utente, Context context, Activity activity, OrdineCallback ordineCallback)
+    {
+        final Ordine[] ordine = new Ordine[1];
+        Log.d(TAG, "Inizio del processo di finalizzazione dell'acquisto");
+        final boolean[] quantitaValida = {verificaQuantita(productList)};
+        if (!quantitaValida[0])
+        {
+            Log.d(TAG, "Quantità non valida rilevata nei prodotti");
+            runOnUiThread(context, () -> {
+                Toast.makeText(context, "La quantità dei prodotti non può essere 0", Toast.LENGTH_SHORT).show();
 
-            if (productList.isEmpty()) {
-                runOnUiThread(context, () -> {
-                    Toast.makeText(context, "Il carrello è vuoto", Toast.LENGTH_SHORT).show();
-                    callback.onCarrelloVuoto();
-                });
-                return;
-            }
+            });
+            return;
+        }
 
-            double prezzoTot = getPrezzoTotale();
+        if (productList.isEmpty()) {
+            runOnUiThread(context, () -> {
+                Toast.makeText(context, "Il carrello è vuoto", Toast.LENGTH_SHORT).show();
+            });
+            return;
+        }
 
-            try {
-                Ordine ordine = socketAPI.creaOrdine(utente, productList);
-                if (ordine != null) {
-                    ordine.setUtente(utente);  // Link the user with the order
-                    runOnUiThread(context, () -> callback.onSuccess(ordine));
-                } else {
-                    runOnUiThread(context, () -> Toast.makeText(context, "Errore nella creazione dell'ordine", Toast.LENGTH_SHORT).show());
+        new Thread(() ->
+        {
+            ordine[0] = socketAPI.creaOrdine(utente, productList, new OrdineCallback()
+            {
+                @Override
+                public void onSuccess(Ordine ordine) {
+                    activity.runOnUiThread(() ->
+                    {
+                        Toast.makeText(context, "Ordine creato con successo", Toast.LENGTH_SHORT).show();
+                        if (ordineCallback != null) {
+                            ordineCallback.onSuccess(ordine); // Chiamata al metodo onSuccess del callback
+                        }
+
+                    });
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                runOnUiThread(context, () -> Toast.makeText(context, "Errore di connessione al server", Toast.LENGTH_SHORT).show());
-            }
+
+                @Override
+                public void onFailure(String errore)
+                {
+                    activity.runOnUiThread(() ->
+                    {
+                        Toast.makeText(context, "Errore nella creazione dell'ordine: " + errore, Toast.LENGTH_SHORT).show();
+                    });
+                }
+            });
         }).start();
+
+
+
+
+
     }
 
 
