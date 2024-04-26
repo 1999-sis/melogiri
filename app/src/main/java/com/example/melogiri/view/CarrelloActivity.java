@@ -72,5 +72,4 @@ public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapt
         });
     }
 
-    // Aggiungi qui altri metodi e implementazioni necessari
 }

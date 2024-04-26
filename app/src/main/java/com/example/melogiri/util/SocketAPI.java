@@ -90,7 +90,7 @@ public class SocketAPI {
         return response;
     }
 
-    public Ordine creaOrdine(Utente utente, List<Bevanda> carrello, OrdineCallback ordineCallback)
+    public Ordine creaOrdine(Utente utente, List<Bevanda> carrello)
     {
         // Imposta l'ID utente statico per il test
         int idUtenteTest = 1;

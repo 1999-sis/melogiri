@@ -14,20 +14,13 @@ import com.example.melogiri.util.SocketAPI;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ControllerCarrello {
 
     private SocketAPI socketAPI;
     private static ControllerCarrello instance;
     private List<Bevanda> productList;
-
-    public interface AcquistoCallback
-    {
-        void onSuccess(Ordine ordine);
-
-        void onQuantitaZero();
-        void onCarrelloVuoto();
-    }
 
     private ControllerCarrello() {
         productList = new ArrayList<>();
@@ -42,8 +35,10 @@ public class ControllerCarrello {
         return instance;
     }
 
-    public void aggiungiProdotto(Bevanda bevanda) {
-        productList.add(bevanda);
+    public void aggiungiProdotto(Bevanda bevanda)
+    {
+        if(!productList.contains(bevanda))
+            productList.add(bevanda);
     }
 
     public void rimuoviProdotto(Bevanda bevanda) {
@@ -66,8 +61,8 @@ public class ControllerCarrello {
     {
         final Ordine[] ordine = new Ordine[1];
         Log.d(TAG, "Inizio del processo di finalizzazione dell'acquisto");
-        final boolean[] quantitaValida = {verificaQuantita(productList)};
-        if (!quantitaValida[0])
+        final boolean[][] quantitaValida = {{verificaQuantita(productList)}};
+        if (!quantitaValida[0][0])
         {
             Log.d(TAG, "Quantità non valida rilevata nei prodotti");
             runOnUiThread(context, () -> {
@@ -86,33 +81,21 @@ public class ControllerCarrello {
 
         new Thread(() ->
         {
-            ordine[0] = socketAPI.creaOrdine(utente, productList, new OrdineCallback()
+            synchronized (this)
             {
-                @Override
-                public void onSuccess(Ordine ordine) {
-                    activity.runOnUiThread(() ->
-                    {
-                        Toast.makeText(context, "Ordine creato con successo", Toast.LENGTH_SHORT).show();
-                        if (ordineCallback != null) {
-                            ordineCallback.onSuccess(ordine); // Chiamata al metodo onSuccess del callback
-                        }
+                ordine[0] = socketAPI.creaOrdine(utente, productList);
+                Log.d("ORDINE", ordine[0].toString());
+                runOnUiThread(context,
+                        ()->
+                        {
+                            Toast.makeText(context, "Ordine confermato", Toast.LENGTH_SHORT).show();
 
-                    });
-                }
+                            productList.clear();
+                        });
+            }
 
-                @Override
-                public void onFailure(String errore)
-                {
-                    activity.runOnUiThread(() ->
-                    {
-                        Toast.makeText(context, "Errore nella creazione dell'ordine: " + errore, Toast.LENGTH_SHORT).show();
-                    });
-                }
-            });
+
         }).start();
-
-
-
 
 
     }
