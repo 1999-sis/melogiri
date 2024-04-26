@@ -34,6 +34,7 @@ public class OrdineAdapter extends RecyclerView.Adapter<OrdineAdapter.OrdineView
     @Override
     public void onBindViewHolder(@NonNull OrdineViewHolder holder, int position) {
         Ordine ordine = ordini.get(position);
+        //mettere holder della bevanda
         holder.tvDataOrdine.setText(dateFormat.format(ordine.getData()));
         holder.tvQuantitaBevande.setText(String.format(Locale.getDefault(), "%d bevande", ordine.getBevandeAquistate().size()));
         holder.tvPrezzoTotale.setText(String.format(Locale.getDefault(), "€%.2f", ordine.getTotale()));
@@ -48,12 +49,14 @@ public class OrdineAdapter extends RecyclerView.Adapter<OrdineAdapter.OrdineView
         TextView tvDataOrdine;
         TextView tvQuantitaBevande;
         TextView tvPrezzoTotale;
+        TextView tvBevanda;
 
         OrdineViewHolder(View itemView) {
             super(itemView);
-            tvDataOrdine = itemView.findViewById(R.id.tvDataOrdine);
-            tvQuantitaBevande = itemView.findViewById(R.id.tvQuantitaBevande);
-            tvPrezzoTotale = itemView.findViewById(R.id.tvPrezzoTotale);
+            tvBevanda = itemView.findViewById(R.id.valueBevanda);
+            tvDataOrdine = itemView.findViewById(R.id.valueData);
+            tvQuantitaBevande = itemView.findViewById(R.id.valueQuantita);
+            tvPrezzoTotale = itemView.findViewById(R.id.valueTotale);
         }
     }
 }

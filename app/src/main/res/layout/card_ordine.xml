@@ -1,32 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="16dp"
+
+    >
+    <TextView
+        android:id="@+id/bevanda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bevanda"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/quantita"
+        />
+    <TextView
+        android:id="@+id/valueBevanda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="nome_bevanda"
+        app:layout_constraintTop_toBottomOf="@id/bevanda"
+        app:layout_constraintLeft_toLeftOf="@id/bevanda"
+        app:layout_constraintRight_toRightOf="@id/bevanda"
+        android:layout_marginTop="5dp"
+        />
+
 
     <TextView
-        android:id="@+id/tvDataOrdine"
-        android:layout_width="0dp"
+        android:id="@+id/quantita"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Data"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/tvQuantitaBevande"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="Quantità"
-        android:gravity="center" />
-
+        app:layout_constraintLeft_toRightOf="@id/bevanda"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/data"
+        />
     <TextView
-        android:id="@+id/tvPrezzoTotale"
-        android:layout_width="0dp"
+        android:id="@+id/valueQuantita"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Totale"
-        android:gravity="center" />
+        android:text="0"
+        app:layout_constraintTop_toBottomOf="@id/quantita"
+        app:layout_constraintLeft_toLeftOf="@id/quantita"
+        app:layout_constraintRight_toRightOf="@id/quantita"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:id="@+id/data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        app:layout_constraintLeft_toRightOf="@id/quantita"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/prezzoTotale"
 
-</LinearLayout>
+        />
+    <TextView
+        android:id="@+id/valueData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="13/02/1999"
+        app:layout_constraintTop_toBottomOf="@id/data"
+        app:layout_constraintLeft_toLeftOf="@id/data"
+        app:layout_constraintRight_toRightOf="@id/data"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:id="@+id/prezzoTotale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Totale"
+        app:layout_constraintLeft_toRightOf="@id/data"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        />
+    <TextView
+        android:id="@+id/valueTotale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2.0"
+        app:layout_constraintTop_toBottomOf="@id/prezzoTotale"
+        app:layout_constraintLeft_toLeftOf="@id/prezzoTotale"
+        app:layout_constraintRight_toRightOf="@id/prezzoTotale"
+        android:layout_marginTop="5dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
