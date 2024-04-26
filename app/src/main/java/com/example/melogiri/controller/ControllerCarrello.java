@@ -11,6 +11,7 @@ import com.example.melogiri.model.Ordine;
 import com.example.melogiri.model.Utente;
 import com.example.melogiri.util.OrdineCallback;
 import com.example.melogiri.util.SocketAPI;
+import com.example.melogiri.view.CarrelloActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,17 +58,14 @@ public class ControllerCarrello {
         return prezzoTotale;
     }
 
-    public void finalizzaAcquisto(Utente utente, Context context, Activity activity, OrdineCallback ordineCallback)
-    {
+    public void finalizzaAcquisto(Utente utente, Context context, Activity activity, OrdineCallback ordineCallback) {
         final Ordine[] ordine = new Ordine[1];
         Log.d(TAG, "Inizio del processo di finalizzazione dell'acquisto");
         final boolean[][] quantitaValida = {{verificaQuantita(productList)}};
-        if (!quantitaValida[0][0])
-        {
+        if (!quantitaValida[0][0]) {
             Log.d(TAG, "Quantità non valida rilevata nei prodotti");
             runOnUiThread(context, () -> {
                 Toast.makeText(context, "La quantità dei prodotti non può essere 0", Toast.LENGTH_SHORT).show();
-
             });
             return;
         }
@@ -79,27 +77,21 @@ public class ControllerCarrello {
             return;
         }
 
-        new Thread(() ->
-        {
-            synchronized (this)
-            {
+        new Thread(() -> {
+            synchronized (this) {
                 ordine[0] = socketAPI.creaOrdine(utente, productList);
                 Log.d("ORDINE", ordine[0].toString());
-                runOnUiThread(context,
-                        ()->
-                        {
-                            Toast.makeText(context, "Ordine confermato", Toast.LENGTH_SHORT).show();
-
-                            productList.clear();
-                        });
+                runOnUiThread(context, () -> {
+                    Toast.makeText(context, "Ordine confermato", Toast.LENGTH_SHORT).show();
+                    productList.clear();
+                    // Aggiornamento dell'interfaccia utente dopo la pulizia del carrello
+                    if (activity instanceof CarrelloActivity) {
+                        ((CarrelloActivity) activity).refreshUI();
+                    }
+                });
             }
-
-
         }).start();
-
-
     }
-
 
     private boolean verificaQuantita(List<Bevanda> productList) {
         for (Bevanda prodotto : productList) {
