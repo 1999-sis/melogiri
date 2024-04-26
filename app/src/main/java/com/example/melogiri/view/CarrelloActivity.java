@@ -23,6 +23,14 @@ public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapt
     private ControllerCarrello controllerCarrello;
     private Utente utente;
 
+    public void refreshUI() {
+        runOnUiThread(() -> {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new CarrelloFragment())
+                    .commitNowAllowingStateLoss();
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,20 +50,20 @@ public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapt
 
         Button buttonAcquista = findViewById(R.id.button3);
         buttonAcquista.setOnClickListener( (view) ->
-        {controllerCarrello.finalizzaAcquisto( utente,  this, this, new OrdineCallback()
-        {
-            @Override
-            public void onSuccess(Ordine ordine)
-            {
-                Log.d("PODODF","3ejd");
-            }
+                {controllerCarrello.finalizzaAcquisto( utente,  this, this, new OrdineCallback()
+                {
+                    @Override
+                    public void onSuccess(Ordine ordine)
+                    {
+                        Log.d("PODODF","3ejd");
+                    }
 
-            @Override
-            public void onFailure(String errore) {
+                    @Override
+                    public void onFailure(String errore) {
 
-            }
-        });
-        }
+                    }
+                });
+                }
         );
     }
 
@@ -68,7 +76,8 @@ public class CarrelloActivity extends AppCompatActivity implements CarrelloAdapt
     public void onProdottoRimosso(Bevanda prodotto) {
         runOnUiThread(() -> {
             Toast.makeText(CarrelloActivity.this, prodotto.getNome() + " rimosso dal carrello", Toast.LENGTH_SHORT).show();
-            // Aggiornamento dell'interfaccia utente e delle strutture dati, se necessario
+            // Aggiornamento dell'interfaccia utente dopo la rimozione del prodotto dal carrello
+            refreshUI();
         });
     }
 
