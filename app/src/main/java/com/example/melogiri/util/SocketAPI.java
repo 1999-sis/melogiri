@@ -73,6 +73,7 @@ public class SocketAPI {
         JSONTokener tokener = new JSONTokener(response);
         JSONObject jsonObject = new JSONObject(tokener);
 
+        utente.setId(jsonObject.getInt("idutente"));
         utente.setNome(jsonObject.getString("nome"));
         utente.setCognome(jsonObject.getString("cognome"));
         utente.setEmail(jsonObject.getString("email"));
@@ -92,17 +93,15 @@ public class SocketAPI {
 
     public Ordine creaOrdine(Utente utente, List<Bevanda> carrello)
     {
-        // Imposta l'ID utente statico per il test
-        int idUtenteTest = 1;
-
-        if (carrello == null || carrello.isEmpty()) {
+        if (carrello == null || carrello.isEmpty())
+        {
             Log.e(TAG, "Il carrello è vuoto.");
             return null;
         }
 
         StringBuilder sb = new StringBuilder();
         sb.append("4"); // Prefisso per l'azione di creazione dell'ordine
-        sb.append(idUtenteTest); // Utilizza l'ID utente statico
+        sb.append(utente.getId()); // Utilizza l'ID utente statico
         sb.append("!");
         double totale = 0.0;
         for (Bevanda bevanda : carrello) {
